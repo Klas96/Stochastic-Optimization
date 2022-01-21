@@ -2,17 +2,19 @@ import numpy as np
 from EvaluateIndividuals import evaluateIndividual
 import random
 
-#Pre: fitArr vector of fitness values, pTor tournament selection parameter, torSize the tournament size.
-#Ret: index Index of the selcted indvidual using tournament selction.
-def tournamentSelect(population):
 
+def tournamentSelect(population):
+    '''
+    Pre: fitArr vector of fitness values, pTor tournament selection parameter, torSize the tournament size.
+    Ret: index Index of the selcted indvidual using tournament selction.
+    '''
     pTor = 0.75
     torSize = 5
 
-    popSize = len(population);
+    popSize = len(population)
 
-    #Chosing torSize individual to participate in tournament
-    #TorSize numbers between 0 and popSize
+    # Chosing torSize individual to participate in tournament
+    # TorSize numbers between 0 and popSize
     selected = np.random.randint(popSize,size=torSize)
 
     fitList = np.array([])
@@ -21,12 +23,11 @@ def tournamentSelect(population):
         fitList = np.append(fitList,evaluateIndividual(chrom))
 
     #sort lists
-    #fitList = np.concatenate(fitList,selected)
     indexes = np.argsort(fitList)
     fitList = fitList[indexes]
     selected = selected[indexes]
 
-    #Preforme Selectio
+    # Preforme Selection
     for i in range(len(selected)):
         index = selected[i]
         if(random.uniform(0, 1) < pTor):

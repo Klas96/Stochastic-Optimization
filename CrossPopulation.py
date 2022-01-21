@@ -3,10 +3,13 @@ import numpy as np
 from TournamentSelection import tournamentSelect
 import random
 
-#Pre: popultaion
-#Ret: Crossed population
-def crossPopulation(population):
-    pCross = 0.8;
+
+def crossPopulation(population, pCross = 0.8):
+    '''
+    Pre: popultaion
+    Ret: Crossed population
+    '''
+
     crossedPopulation = []
     for i in range(0,len(population),2):
         #Tournament selection
@@ -16,18 +19,22 @@ def crossPopulation(population):
             #Cross
             child1,child2 = crossChromosones(select1, select2)
         else:
-            child1 = select1;
-            child2 = select2;
+            child1 = select1
+            child2 = select2
 
         crossedPopulation.append(child1)
         crossedPopulation.append(child2)
     #return crossed
     return(crossedPopulation)
 
-#Pre: Cross two chromosones with one pioint crossover
-#Ret1: Crossed chromosone
-#Ret2: crossed Chromosone
+
 def crossChromosones(chrom1,chrom2):
+    '''
+    Pre: Cross two chromosones with one pioint crossover
+    Ret1: Crossed chromosone
+    Ret2: crossed Chromosone
+    '''
+
     lenChrom = chrom1.size
     splitPoint = np.random.randint(0,lenChrom)
 

@@ -3,19 +3,19 @@ from EvaluateIndividuals import evaluateIndividual
 from InitializePopulation import initializePopulation
 from DecodeChromosone import decodeBinaryChromosone
 
-def GA():
-    #Init
-    numGenerations = 250
+def GA(numGenerations = 250):
+    # Init
     print("Running GA")
     print("Number of Generations: " + str(numGenerations))
     population = initializePopulation()
-    #Evolve
+
+    # Evolve
     for i in range(numGenerations):
         print("Generation: " + str(i))
-        #fitArr = evaluateIndividual(popoplation)
         population = formNextGeneration(population)
-    #Return
-    #Find Max in population
+    
+    # Return
+    # Find Max in population
     maxFitValue = 0
     maxVariabels = []
     for chrom in population:
