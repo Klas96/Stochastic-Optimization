@@ -1,15 +1,21 @@
 from DecodeChromosone import decodeBinaryChromosone
 
-#Pre: Chromosone
-#Ret: Fitness value, The clesr to zero the better preformence.
+
 def evaluateIndividual(chrom):
+    '''
+    Pre: Chromosone
+    Ret: Fitness value, The clesr to zero the better preformence.
+    '''
     var = decodeBinaryChromosone(chrom)
     fitValue = fitnessFunction(var)
     return(fitValue)
 
-#Pre: Variables
-#Ret: fitness value
 def fitnessFunction(var):
+    '''
+    Pre: Variables
+    Ret: fitness value
+    '''
+
     x1 = var[0]
     x2 = var[1]
 

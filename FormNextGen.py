@@ -2,14 +2,13 @@ from CrossPopulation import crossPopulation
 from MutatePopulation import mutatePopulation
 
 def formNextGeneration(population):
-    #Build Fittnnes Array
+    # Build Fittnnes Array
 
     #Cross Population
     population = crossPopulation(population)
-    #Mutate Poulation
+    # Mutate Poulation
     population = mutatePopulation(population)
-    #Insert Best Individual
+    # Insert Best Individual
     
-    #Return Next Generation:
-
+    # Return Next Generation:
     return(population)

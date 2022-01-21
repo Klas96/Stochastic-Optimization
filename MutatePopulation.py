@@ -12,12 +12,11 @@ def mutatePopulation(population):
     return(population)
 
 
-def mutateChromosone(chrom):
+def mutateChromosone(chrom, pMut = 0.05):
     '''
     Pre: chrom, a crhomosone, pMut a Mutate probability
     Ret: chroMut Mutated chromosone
     '''
-    pMut = 0.05
     chromMut = chrom
     for i in range(chrom.size):
         if(random.uniform(0, 1) < pMut):

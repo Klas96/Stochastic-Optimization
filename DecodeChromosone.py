@@ -1,8 +1,10 @@
-#Pre: Binary Chromosone, numpy array of ones and zeros
-#Ret: Variabels Enconded in the chromsone, Doubles
 
-def decodeBinaryChromosone(chrom):
-    intrevall = [0,1]
+
+def decodeBinaryChromosone(chrom, intrevall = [0,1]):
+    '''
+    Pre: Binary Chromosone, numpy array of ones and zeros
+    Ret: Variabels Enconded in the chromsone, Doubles
+    '''
     diff = intrevall[1]-intrevall[0]
     varLength = 25
     numVar = int(chrom.size/25)

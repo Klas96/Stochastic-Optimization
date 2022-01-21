@@ -30,7 +30,7 @@ def crossPopulation(population, pCross = 0.8):
 
 def crossChromosones(chrom1,chrom2):
     '''
-    Pre: Cross two chromosones with one pioint crossover
+    Pre: Cross two chromosones with one point crossover
     Ret1: Crossed chromosone
     Ret2: crossed Chromosone
     '''
@@ -50,3 +50,14 @@ def crossChromosones(chrom1,chrom2):
     child2 = np.append(chrom2Part1, chrom1Part2)
 
     return(child1,child2)
+
+
+def crossChromosonesTwoPoint(chrom1,chrom2):    
+    '''
+    Pre: Cross two chromosones with one point crossover
+    Ret1: Crossed chromosone
+    Ret2: crossed Chromosone
+
+    TODO: Cross Population with Two point Crossover
+    '''
+    pass
