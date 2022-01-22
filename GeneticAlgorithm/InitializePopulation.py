@@ -2,14 +2,13 @@ import numpy as np
 
 #Pre: Number of Individuals In Populations
 #Ret: Population, List of populationSize number of numpy arrays§
-def initializePopulation(popSz = 100):
-    print("Creating popoplation with sieze " + str(popSz))
+def initializePopulation(popSz = 100, number_of_variabels = 3):
+    print("Creating popoplation with size " + str(popSz))
     population = []
-    numberOfVariabels = 3
     #create popoplation
     for i in range(popSz):
         #create Init Individual
-        individual = createBinaryChromosome(numberOfVariabels)
+        individual = createBinaryChromosome(number_of_variabels)
         #append Individual
         population.append(individual)
     return(population)

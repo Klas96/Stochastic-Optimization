@@ -1,13 +1,14 @@
 import random
-from EvaluateIndividuals import evaluateIndividual
+
+from .EvaluateIndividuals import evaluateIndividual
 
 
-def findBestChrom(popularion):
+def find_best_chrom(popularion):
     '''
     arg: population
     '''
-    min_fitnes = inf
-    best_chrom = 0
+    min_fitnes = float('inf')
+    best_chrom = popularion[0]
     for chrom in popularion:
         fitness_value = evaluateIndividual(chrom)
         if(fitness_value < min_fitnes):
@@ -27,7 +28,9 @@ def insertChrom(chrom, population, num_insert = 1):
     ret1: population with inserted chromsome
     '''
     
-    popSz = len(population)
-    index = random.randint(popSz,numInsert)
-    population[index] = chrom
+    population_size = len(population)
+    indexes = random.sample(range(population_size), num_insert)
+    for idx in indexes:
+        population[idx] = chrom
+    
     return(population)

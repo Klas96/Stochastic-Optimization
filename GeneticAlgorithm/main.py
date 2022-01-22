@@ -1,13 +1,15 @@
-from FormNextGen import formNextGeneration
-from EvaluateIndividuals import evaluateIndividual, fitnessFunction
-from InitializePopulation import initializePopulation
-from DecodeChromosone import decodeBinaryChromosone
+from .FormNextGen import formNextGeneration
+from .EvaluateIndividuals import evaluateIndividual, fitnessFunction
+from .InitializePopulation import initializePopulation
+from .DecodeChromosone import decodeBinaryChromosone
 
 
 def GA(numGenerations = 250, verbose = False):
     '''
     arg numGenerations = 250
     verbose = False
+
+    finding 
     '''
     if verbose:
         print("Running GA")
@@ -19,7 +21,7 @@ def GA(numGenerations = 250, verbose = False):
     for i in range(numGenerations):
         if verbose:
             print("Generation: " + str(i))
-        population = formNextGeneration(population)
+        population, best_chrom, min_fitnes = formNextGeneration(population)
     
     # Find Max in population
     maxFitValue = 0

@@ -1,15 +1,14 @@
 import numpy as np
-from EvaluateIndividuals import evaluateIndividual
 import random
 
+from .EvaluateIndividuals import evaluateIndividual
 
-def tournamentSelect(population):
+
+def tournamentSelect(population, pTor = 0.75, torSize = 5):
     '''
     Pre: fitArr vector of fitness values, pTor tournament selection parameter, torSize the tournament size.
     Ret: index Index of the selcted indvidual using tournament selction.
     '''
-    pTor = 0.75
-    torSize = 5
 
     popSize = len(population)
 

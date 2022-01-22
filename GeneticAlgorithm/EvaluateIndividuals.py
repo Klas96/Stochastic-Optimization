@@ -1,19 +1,23 @@
-from DecodeChromosone import decodeBinaryChromosone
+from .DecodeChromosone import decodeBinaryChromosone
 
 
 def evaluateIndividual(chrom):
     '''
     Pre: Chromosone
-    Ret: Fitness value, The clesr to zero the better preformence.
+    Ret: Fitness value, The closer to zero the better preformence.
     '''
     var = decodeBinaryChromosone(chrom)
     fitValue = fitnessFunction(var)
     return(fitValue)
 
+
 def fitnessFunction(var):
     '''
-    Pre: Variables
-    Ret: fitness value
+    Pre: List of Variables
+    Ret: Fitness value
+
+    if minimum max the fitness value
+    if maximum min the fitness value
     '''
 
     x1 = var[0]

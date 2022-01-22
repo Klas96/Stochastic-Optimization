@@ -1,7 +1,6 @@
 import random
 import numpy as np
-from TournamentSelection import tournamentSelect
-import random
+from .TournamentSelection import tournamentSelect
 
 
 def crossPopulation(population, pCross = 0.8):
