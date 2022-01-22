@@ -1,11 +1,10 @@
 import unittest
-import GeneticAlgorithm.genetic_algorithm as GA
-from GeneticAlgorithm.EvaluateIndividuals import fitnessFunction
+import AntSystem.AntSystem 
 
 
-class test_GA(unittest.TestCase):
+class test_AS(unittest.TestCase):
 
-    def test_GA(self):
+    def test_AS(self):
         '''
         Test Genetic Algorithm
         '''

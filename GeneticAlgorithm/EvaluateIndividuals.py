@@ -8,6 +8,7 @@ def evaluateIndividual(chrom):
     '''
     var = decodeBinaryChromosone(chrom)
     fitValue = fitnessFunction(var)
+
     return(fitValue)
 
 
@@ -31,5 +32,6 @@ def fitnessFunction(var):
     if(g == 0):
         g = 10**(-10)
 
-    fitValue = 1./g
+    fitValue = 1/g
+
     return(fitValue)

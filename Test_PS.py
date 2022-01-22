@@ -1,11 +1,10 @@
 import unittest
-import GeneticAlgorithm.genetic_algorithm as GA
-from GeneticAlgorithm.EvaluateIndividuals import fitnessFunction
+import particelSwarm
 
 
-class test_GA(unittest.TestCase):
+class test_PS(unittest.TestCase):
 
-    def test_GA(self):
+    def test_PS(self):
         '''
         Test Genetic Algorithm
         '''

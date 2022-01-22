@@ -3,6 +3,7 @@ def decodeBinaryChromosone(chrom, intrevall = [0,1]):
     Pre: Binary Chromosone, numpy array of ones and zeros
     Ret: Variabels Enconded in the chromsone, Doubles
     '''
+    
     diff = intrevall[1]-intrevall[0]
     # TODO should be calculated from number of variables and length of chromsone
     varLength = 25

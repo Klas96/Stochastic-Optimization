@@ -61,8 +61,9 @@ Return to step 2, unless the termination criterion has been reached.
 Initialize pheromone levels: \[ \tau \] ij = \tau max , ∀ i, j ∈ [1, n].
 ### 2. 
 
-For each ant k, select a random starting node, and add it to the (initiallyempty) tabu list L T . Next, build the tour S. In each step of the tour, select the
-move from node j to node i with probability p(e ij |S), given by:
+For each ant select a random starting node, and add it to the (initiallyempty) tabu list. Next, build the tour S. In each step of the tour, select the move from node j to node i with probability p(e ij |S), given by:
+
+
 \beta
 \tau ij \alpha η ij
 p(e ij |S) = 
@@ -70,6 +71,7 @@ p(e ij |S) =
 ν l ∈L
 / T (S) \tau lj η lj
 .
+
 In the final step, return to the node of origin, i.e. the first element in L T .
 Finally, compute and store the length D k of the tour.
 ### 3. 
@@ -79,19 +81,13 @@ Update the pheromone levels:
 #### 3.1.
 
 For the best ant (either the best in the current iteration or the best so far)[b]
-determine \tau ij as:
-
-[b]
-\tau ij
-=
-1
-D b
-0
-if the best ant traversed the edge e ij ,
-otherwise.
+determine \tau ij as:
+[b] \tau ij = 1 D b0
+if the best ant traversed the edge otherwise.
+
 #### 3.2. 
 
-Modify \tau ij :[b] \tau ij ← (1 − ρ)\tau ij + \tau ij .
+Modify \tau ij :[b] \tau ij ← (1 − ρ)\tau ij + \tau ij .
 
 #### 3.3.
 
