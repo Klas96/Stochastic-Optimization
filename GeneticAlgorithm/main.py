@@ -4,10 +4,15 @@ from InitializePopulation import initializePopulation
 from DecodeChromosone import decodeBinaryChromosone
 
 
-def GA(numGenerations = 250, verbose = True):
-    # Init
-    print("Running GA")
-    print("Number of Generations: " + str(numGenerations))
+def GA(numGenerations = 250, verbose = False):
+    '''
+    arg numGenerations = 250
+    verbose = False
+    '''
+    if verbose:
+        print("Running GA")
+        print("Number of Generations: " + str(numGenerations))
+    
     population = initializePopulation()
     
     # Evolve
@@ -16,20 +21,21 @@ def GA(numGenerations = 250, verbose = True):
             print("Generation: " + str(i))
         population = formNextGeneration(population)
     
-    # Return
     # Find Max in population
     maxFitValue = 0
     maxVariabels = []
+
     for chrom in population:
         fitValue = evaluateIndividual(chrom)
         if fitValue > maxFitValue:
             maxFitValue = fitValue
             maxVariabels = decodeBinaryChromosone(chrom)
+    
     finalAns = maxFitValue
     return finalAns, maxVariabels
 
 def main():
-    finalAns, variabel = GA()
+    finalAns, variabel = GA(verbose = True)
     print(finalAns)
     print(variabel)
 
