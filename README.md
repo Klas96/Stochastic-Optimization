@@ -22,7 +22,7 @@ Binary decoding
 
 #### 2.2. 
 
-Evaluate the objective function f using the variable values obtained in the previous step, and assign a fitness value F i = f (x i ).
+Evaluate the objective function f using the variable values obtained in the previous step, and assign a fitness value F_i = f (x_i).
 
 #### 2.3. 
 
@@ -58,9 +58,7 @@ Return to step 2, unless the termination criterion has been reached.
 
 ### 1.
 
- Initialize pheromone levels:
-\tau ij = \tau max ,
-∀ i, j ∈ [1, n].
+Initialize pheromone levels: \[ \tau \] ij = \tau max , ∀ i, j ∈ [1, n].
 ### 2. 
 
 For each ant k, select a random starting node, and add it to the (initiallyempty) tabu list L T . Next, build the tour S. In each step of the tour, select the

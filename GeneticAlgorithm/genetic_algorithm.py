@@ -20,7 +20,7 @@ def GA(numGenerations = 250, verbose = False):
     # Evolve
     for i in range(numGenerations):
         if verbose:
-            print("Generation: " + str(i))
+            print(f"Generation: {i} {min_fitnes=}")
         population, best_chrom, min_fitnes = formNextGeneration(population)
     
     # Find Max in population

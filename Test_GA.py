@@ -1,10 +1,11 @@
 import unittest
-from GeneticAlgorithm.main import GA
+import GeneticAlgorithm.genetic_algorithm as GA
+
 
 class test_GA(unittest.TestCase):
 
     def test_GA(self):
-        finalAns, variabel = GA()
+        finalAns, variabel = GA.GA() #Dont look good
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
 

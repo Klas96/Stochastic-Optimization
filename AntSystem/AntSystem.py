@@ -27,7 +27,7 @@ def DeBug():
 
 def AS():
     
-    # Ant system (AS) for TSP.
+    # Ant system (AS) for Traveling Sales Man Problem (TSP)
 
     # Data
     
