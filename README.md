@@ -16,13 +16,11 @@ Evaluate the individuals:
 
 #### 2.1. 
 
-Decode chromosome c i to form the corresponding variables.
-
-Binary decoding
+Decode chromosome to variables with Binary decoding.
 
 #### 2.2. 
 
-Evaluate the objective function f using the variable values obtained in the previous step, and assign a fitness value F_i = f (x_i).
+Evaluate the objective function f using the variable values obtained in the previous step, and assign a fitness value for each chromosone.
 
 #### 2.3. 
 
@@ -38,8 +36,8 @@ Select two individuals from the evaluated population, such that individuals with
 
 #### 3.2. 
 
-Generateing the two selected chromosomes.
- two new chromosomes by cross
+From the two selected chromosones genrate two new chromosones.
+
 #### 3.3. 
 
 Mutate the two chromosomes generated in the previous step.
@@ -53,6 +51,8 @@ Repeat steps 3.1–3.3 until N new individuals have been generated. Then replace
 Return to step 2, unless the termination criterion has been reached.
 
 ## Particel Swarm
+
+TODO
 
 ## Ant System
 

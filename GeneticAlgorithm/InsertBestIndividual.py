@@ -7,14 +7,15 @@ def find_best_chrom(popularion):
     '''
     arg: population
     '''
-    min_fitnes = float('inf')
+    max_fitnes = -float('inf')
     best_chrom = popularion[0]
     for chrom in popularion:
         fitness_value = evaluateIndividual(chrom)
-        if(fitness_value < min_fitnes):
-            min_fitnes = fitness_value
+        if(fitness_value > max_fitnes):
+            max_fitnes = fitness_value
+            best_chrom = chrom
 
-    return(min_fitnes, best_chrom)
+    return(max_fitnes, best_chrom)
 
 
 
