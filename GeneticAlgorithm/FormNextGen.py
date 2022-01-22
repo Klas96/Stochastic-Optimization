@@ -1,8 +1,8 @@
 from .CrossPopulation import crossPopulation
 from .MutatePopulation import mutatePopulation
-from .InsertBestIndividual import insertChrom, find_best_chrom
+from .InsertBestIndividual import insert_chromosone, find_best_chrom
 
-def formNextGeneration(population, verbose = False):
+def form_next_generation(population, verbose = False):
     '''
     pre: population
     return: population, best_chrom, min_fitness
@@ -19,7 +19,7 @@ def formNextGeneration(population, verbose = False):
     population = mutatePopulation(population)
 
     # Insert best chromosome
-    population = insertChrom(best_chrom, population)
+    population = insert_chromosone(best_chrom, population)
     
     # Return Next Generation:
     return(population, best_chrom, max_fitness)

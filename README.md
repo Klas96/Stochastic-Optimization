@@ -102,6 +102,6 @@ If 1/(ρD b ) > \tau max then update \tau max as \tau max ← 1/(ρD b ).
 
 # TODO
 
-Finish Ant_Sysytem and ParticleSwarm
+* Finish Ant_Sysytem and ParticleSwarm
 
-Testing
+* Testing

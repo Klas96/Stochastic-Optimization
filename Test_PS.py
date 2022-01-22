@@ -8,7 +8,8 @@ class test_PS(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA.GA() #Dont look good
+        finalAns, variabel = GA.GA()
+
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, fitnessFunction(variabel))

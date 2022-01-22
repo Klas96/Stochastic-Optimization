@@ -19,7 +19,7 @@ def find_best_chrom(popularion):
 
 
 
-def insertChrom(chrom, population, num_insert = 1):
+def insert_chromosone(chrom, population, num_insert = 1):
     '''
     Inserts chromsome at random index in population
 

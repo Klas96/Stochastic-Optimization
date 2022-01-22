@@ -1,4 +1,4 @@
-from .FormNextGen import formNextGeneration
+from .FormNextGen import form_next_generation
 from .EvaluateIndividuals import evaluateIndividual, fitnessFunction
 from .InitializePopulation import initializePopulation
 from .DecodeChromosone import decode_binary_chromosone
@@ -21,9 +21,9 @@ def GA(numGenerations = 250, verbose = False):
     
     # Evolve
     for i in range(numGenerations):
-        population, best_chrom, max_fitnes = formNextGeneration(population)
+        population, best_chrom, max_fitnes = form_next_generation(population)
         if verbose:
-            print(f"Generation: {i} {max_fitnes=}")
+            print(f"Generation: {i}, {max_fitnes=}")
     
     # Find Max in population
     maxFitValue = 0

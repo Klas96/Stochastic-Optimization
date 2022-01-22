@@ -1,4 +1,5 @@
 from .DecodeChromosone import decode_binary_chromosone
+import numpy as np
 
 
 def evaluateIndividual(chrom):
@@ -13,7 +14,12 @@ def evaluateIndividual(chrom):
 
 
 
-#TODO Decorator function depending on min or max
+def decorator_maximize(fnc):
+    def inner(var):
+        fitValue = fnc(var)
+        return(fitValue)
+    return inner
+
 def decorator_minize(fnc):
     def inner(var):
         fitValue = fnc(var)
@@ -43,8 +49,7 @@ def fitnessFunction(var):
 
     func_value = r1+r2+r3
 
-    if(func_value == 0):
-        g = 10**(-10)
+    if(func_value == 0): func_value = 1e-10
 
     return(func_value)
 
@@ -71,7 +76,5 @@ def fitnessFunctionOne(var):
 
     if(g == 0):
         g = 10**(-10)
-
-    fitValue = 1/g
 
     return(fitValue)

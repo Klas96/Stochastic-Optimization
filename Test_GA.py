@@ -9,7 +9,7 @@ python testMyCase.py MyCase.testItIsHot
 
 
 class test_GA(unittest.TestCase):
-
+    #TODO test other functions
     def test_GA(self):
         '''
         Test Genetic Algorithm
