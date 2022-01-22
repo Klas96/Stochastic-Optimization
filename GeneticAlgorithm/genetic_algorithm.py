@@ -4,6 +4,8 @@ from .InitializePopulation import initializePopulation
 from .DecodeChromosone import decode_binary_chromosone
 
 
+#Todo add function as vaiable
+#Todo add exit criteria
 def GA(numGenerations = 250, verbose = False):
     '''
     arg numGenerations = 250
@@ -13,7 +15,7 @@ def GA(numGenerations = 250, verbose = False):
     '''
     if verbose:
         print("Running GA")
-        print("Number of Generations: " + str(numGenerations))
+        print(f"Number of Generations: {numGenerations}")
     
     population = initializePopulation()
     
@@ -33,8 +35,8 @@ def GA(numGenerations = 250, verbose = False):
             maxFitValue = fitValue
             maxVariabels = decode_binary_chromosone(chrom)
     
-    finalAns = maxFitValue
-    return finalAns, maxVariabels
+    final_answer = maxFitValue
+    return final_answer, maxVariabels
 
 def main():
     finalAns, variabel = GA(verbose = True)

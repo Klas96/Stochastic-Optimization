@@ -14,7 +14,14 @@ def evaluateIndividual(chrom):
 
 
 #TODO Decorator function depending on min or max
+def decorator_minize(fnc):
+    def inner(var):
+        fitValue = fnc(var)
+        return(1/fitValue)
+    return inner
 
+
+@decorator_minize
 def fitnessFunction(var):
     '''
     Pre: List of Variables
@@ -34,14 +41,12 @@ def fitnessFunction(var):
     r2 = (x2-0.5)**2
     r3 = (x3-0.5)**2
 
-    g = r1*r2*r3
+    func_value = r1+r2+r3
 
-    if(g == 0):
+    if(func_value == 0):
         g = 10**(-10)
 
-    fitValue = 1/g
-
-    return(fitValue)
+    return(func_value)
 
 
 def fitnessFunctionOne(var):
