@@ -1,6 +1,6 @@
 import numpy as np
 
-def initializePopulation(population_size = 100, number_of_variabels = 3):
+def initialize_population(population_size = 100, number_of_variabels = 3):
     '''
     Pre: Number of Individuals In Populations
     Ret: Population, List of populationSize number of numpy arrays§
@@ -9,10 +9,13 @@ def initializePopulation(population_size = 100, number_of_variabels = 3):
     population = np.random.randint(0,2,(population_size,number_of_variabels*variabel_length))
     return(population)
 
-def initializePopulationOld(population_size = 100, number_of_variabels = 3):
+
+def initializePopulationList(population_size = 100, number_of_variabels = 3):
     '''
     Pre: Number of Individuals In Populations
-    Ret: Population, List of populationSize number of numpy arrays§
+    Ret: Population, List of populationSize number of numpy arrays
+
+    The Good thing with this is that it can hold chromosomes with diffrent lengths
     '''
 
     print("Creating popoplation with size " + str(population_size))

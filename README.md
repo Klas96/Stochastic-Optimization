@@ -8,7 +8,7 @@ Genetic Algorithm run in main.py and can be run py importing GA.
 
 ### 1. 
 
-Initialize the population by randomly generating N binary strings (chromosomes)
+Initialize the population by randomly generating N binary (chromosomes)
 
 ### 2. 
 

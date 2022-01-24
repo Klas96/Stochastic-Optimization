@@ -1,16 +1,19 @@
 import random
 
-from .EvaluateIndividuals import evaluateIndividual
+from .evaluate_individuals import evaluate_individual
 
 
-def find_best_chrom(popularion):
+def find_best_chrom(popularion, target_function = None):
     '''
     arg: population
+    ret: max_fitnes, best_chrom
     '''
+
     max_fitnes = -float('inf')
     best_chrom = popularion[0]
+
     for chrom in popularion:
-        fitness_value = evaluateIndividual(chrom)
+        fitness_value = evaluate_individual(chrom, target_function = target_function)
         if(fitness_value > max_fitnes):
             max_fitnes = fitness_value
             best_chrom = chrom
@@ -29,7 +32,7 @@ def insert_chromosone(chrom, population, num_insert = 1):
     ret1: population with inserted chromsome
     '''
     
-    population_size = len(population)
+    population_size = population.shape[0]
     indexes = random.sample(range(population_size), num_insert)
     for idx in indexes:
         population[idx] = chrom

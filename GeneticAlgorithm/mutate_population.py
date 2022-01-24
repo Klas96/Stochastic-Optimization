@@ -1,6 +1,6 @@
 import random
 
-def mutatePopulation(population):
+def mutate_population(population):
     '''
     Pre:population
     Ret:mutated population
@@ -8,12 +8,12 @@ def mutatePopulation(population):
     
     for i in range(len(population)):
         chrom = population[i]
-        chromMut = mutateChromosone(chrom)
+        chromMut = mutate_chromosone(chrom)
         population[i] = chromMut
     return(population)
 
 
-def mutateChromosone(chrom, pMut = 0.05):
+def mutate_chromosone(chrom, pMut = 0.05):
     '''
     Pre: chrom, a crhomosone, pMut a Mutate probability
     Ret: chroMut Mutated chromosone

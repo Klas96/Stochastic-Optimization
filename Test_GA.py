@@ -1,7 +1,7 @@
 import unittest
 import GeneticAlgorithm.genetic_algorithm as GA
-from GeneticAlgorithm.EvaluateIndividuals import fitnessFunction
-from GeneticAlgorithm.DecodeChromosone import decode_binary_chromosone
+from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
+from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 
 '''
 python testMyCase.py MyCase.testItIsHot
@@ -14,14 +14,14 @@ class test_GA(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA.GA(verbose = True) #Dont look good
+        finalAns, variabel = GA.GA() #Dont look good
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
-        self.assertEqual(finalAns, fitnessFunction(variabel))
+        self.assertEqual(finalAns, function_to_mimimixe(variabel))
         
         print(f"{finalAns=}")
         print(f"{variabel=}")
-        print(f"{fitnessFunction(variabel)=}")
+        print(f"{function_to_mimimixe(variabel)=}")
 
     def test_decode_binary_chromosone(self):
         '''
@@ -37,6 +37,20 @@ class test_GA(unittest.TestCase):
         self.assertEqual(low_inter, decode_variable[1])
 
         print(decode_variable)
+    
+    def target_function(var):
+        x1 = var[0]
+        x2 = var[1]
+        x3 = var[2]
+
+        function_value = (x1-3)**2 + (x2-7)**2 + (x3-1)**2
+
+        return(function_value)
+    
+    def test_minimize_target_function(self):
+        finalAns, variabel = GA.GA(target_function = self.target_function, verbose = True)
+        print(f"{finalAns=} , {variabel=}")
+
 
 
 if __name__ == '__main__':
