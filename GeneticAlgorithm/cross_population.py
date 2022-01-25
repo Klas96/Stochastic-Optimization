@@ -4,7 +4,7 @@ import numpy as np
 from .tournament_selection import tournament_select
 
 
-def cross_population(population, pCross = 0.8):
+def cross_population(population, target_function, pCross = 0.8):
     '''
     Pre: np.array shpe = chromLen, populationSize
     Ret: np.Arary 
@@ -15,8 +15,8 @@ def cross_population(population, pCross = 0.8):
     for i in range(0,len(population),2):
 
         # Tournament selection
-        select1 = tournament_select(population)
-        select2 = tournament_select(population)
+        select1 = tournament_select(population, target_function)
+        select2 = tournament_select(population, target_function)
 
         if(random.uniform(0, 1) < pCross):
             #Cross

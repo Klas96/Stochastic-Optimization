@@ -45,7 +45,7 @@ def GA(target_function = None, minimize = True, numGenerations = 250, verbose = 
             curent_best_fitness = max_fitnes
             curent_best_variables = decode_binary_chromosone(best_chrom)
             #TODO change to value of real function
-            curent_optima = function(curent_best_variables)
+            curent_optima = target_function(curent_best_variables)
 
         if verbose:
             print(f"Generation: {i}, {curent_optima=}, {curent_best_variables=}")

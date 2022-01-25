@@ -18,6 +18,15 @@ def function_to_mimimixe(var):
 
 
 
+def decorator_maximize(fnc):
+
+    def inner(var):
+    
+        fit_value = fnc(var)
+        return(fit_value)
+    
+    return inner
+
 def target_to_fitness_min(fnc):
 
     def inner(var):
@@ -33,17 +42,34 @@ def target_to_fitness_min(fnc):
 
 def evaluate_individual(chrom, target_function = function_to_mimimixe, minmize = True):
     '''
-    Pre: 
-        Chromosone
-    Ret: 
-        Fitness value, The closer to zero the better preformence.
+    Pre: Chromosone
+    Ret: Fitness value, The closer to zero the better preformence.
     '''
 
     if(minmize):
         fitness_function = target_to_fitness_min(target_function)
 
     var = decode_binary_chromosone(chrom)
-
     fit_value = fitness_function(var)
 
     return(fit_value)
+
+
+@target_to_fitness_min
+def fitness_function(var, target_function = function_to_mimimixe):
+    '''
+    Pre: List of Variables
+    Ret: Fitness value
+
+    if minimum max the fitness value
+    if maximum min the fitness value
+
+    we are allways trying to maximize fitness value
+    '''
+
+    func_value = target_function(var)
+
+    if(func_value == 0): func_value = 1e-10
+
+    return(func_value)
+

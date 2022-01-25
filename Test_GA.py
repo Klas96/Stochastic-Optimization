@@ -7,6 +7,15 @@ from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 python testMyCase.py MyCase.testItIsHot
 '''
 
+def target_function(var):
+    x1 = var[0]
+    x2 = var[1]
+    x3 = var[2]
+
+    function_value = (x1-0.3)**2 + (x2-0.7)**2 + (x3-0.1)**2
+
+    return(function_value)
+
 
 class test_GA(unittest.TestCase):
     #TODO test other functions
@@ -38,17 +47,8 @@ class test_GA(unittest.TestCase):
 
         print(decode_variable)
     
-    def target_function(var):
-        x1 = var[0]
-        x2 = var[1]
-        x3 = var[2]
-
-        function_value = (x1-3)**2 + (x2-7)**2 + (x3-1)**2
-
-        return(function_value)
-    
     def test_minimize_target_function(self):
-        finalAns, variabel = GA.GA(target_function = self.target_function, verbose = True)
+        finalAns, variabel = GA.GA(target_function = target_function, verbose = True)
         print(f"{finalAns=} , {variabel=}")
 
 
