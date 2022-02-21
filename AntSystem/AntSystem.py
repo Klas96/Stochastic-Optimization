@@ -101,16 +101,14 @@ def AS():
 
 
 def UpdatePheromoneLevels(pheromoneLevel, deltaPheromoneLevel, rho):
-    '''
-    Pre:
-    pheromoneLevel: levels of phermone at eveary path
-    deltaPheromoneLevel:
-    rho:
-    Ret:
-    pheromoneLevel: New and updated phermone levles
-    TestStaus: None
-    Dependencies:
-    '''
+    """
+    Args:
+        pheromoneLevel - levels of phermone at eveary path
+        deltaPheromoneLevel -
+        rho -
+    Returns:
+        pheromoneLevel: New and updated phermone levles
+    """
 
     pheromoneLevel = pheromoneLevel*(1-rho) + deltaPheromoneLevel
     return(pheromoneLevel)
@@ -122,7 +120,12 @@ def UpdatePheromoneLevels(pheromoneLevel, deltaPheromoneLevel, rho):
 #Ret
   #Matrix ofpathCollection the Phermone Updat levels decide py the path
 def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
+    """
+    Args:
 
+    Returns:
+
+    """
     deltaPheromoneLevel = zeros(len(pathCollection(1,:)),len(pathCollection(1,:)))
 
     for iPath in range(1,len(pathCollection(:,1))):
@@ -142,17 +145,14 @@ def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
 def GeneratePath(pheromoneLevel, visibility, alpha, beta):
     """
     Args:
-    pheromoneLevel: levels of phermone at eveary path
-    visibility
-    alpha: Const
-    beta: Const
-    tabuList: List of allready vivited Nodes
+        pheromoneLevel -levels of phermone at eveary path
+        visibility
+        alpha: Const
+        beta: Const
+        tabuList - List of allready vivited Nodes
     
     Returns:
-    path: Path generated
-    TestStaus: OK
-    Dependencies: ChoosePath
-    Problem Kommer gå från sig själv till sig själv hela tiden??
+        path: Path generated
     """
 
     indexForCitys = range(1,len(pheromoneLevel))
@@ -186,16 +186,16 @@ def GeneratePath(pheromoneLevel, visibility, alpha, beta):
 def  ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
     '''
     Args:
-    #startingPoint
-    #pheromoneLevel: levels of phermone at eveary path
-    #visibility
-    #alpha: Const
-    #beta: Const
-    #tabuList: Boulean list. Faslse - visited
-    #Ret:
-    #nextVeretex: Next Veretex chosen
-    #TestStaus: OK
-    #Dependencies: RunChoise
+        startingPoint
+        #pheromoneLevel: levels of phermone at eveary path
+        #visibility
+        #alpha: Const
+        #beta: Const
+        #tabuList: Boulean list. Faslse - visited
+    Returns:
+        #nextVeretex: Next Veretex chosen
+        #TestStaus: OK
+        #Dependencies: RunChoise
     '''
 
     nextVeretex = RunChoise(phermoneArray,visibilityArray,alpha, beta)
@@ -221,7 +221,7 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
     probHigh = 0
     indexChosen = 1
 
-    #Making Normalizing Factor
+    # Making Normalizing Factor
     normlize = phermoneArray**alpha
     normlize = sum(normlize*visibilityArray**beta)
 
@@ -232,8 +232,8 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
         probInter = probInter/normlize
 
         probHigh = probLow + probInter
-        if probLow <= r and r <= probHigh
-        indexChosen = i
+        if probLow <= r and r <= probHigh:
+            indexChosen = i
         
         probLow = probHigh
     return(indexChosen)
@@ -256,14 +256,12 @@ def InitializePheromoneLevels(numberOfCities, tau0):
     return(pheromoneLevel)
 
 def get_visibility(cityLocation)
-    '''
-    Pre:
-    cityLocation: 2d positions of all avaliable cities
-    Ret:
-    #nearNeigPathLen: len Of The Nearest Naigbhor Path
-    TestStaus: None
-    Dependencies: GetDist
-    '''
+    """
+    Args:
+        cityLocation - 2d positions of all avaliable cities
+    Returns:
+        nearNeigPathLen - len Of The Nearest Naigbhor Path
+    """
 
     numberOfCities = len(cityLocation(:,1))
     visib = zeros(numberOfCities,numberOfCities)
@@ -345,8 +343,6 @@ def get_nearest_neighbour(cityPos, cityLocations):
     
     Returns:
         index of nearest path, lenNearest path
-    TestStaus: None
-    Dependencies: GetDist
     """
     indexNearest = 0
 
@@ -365,11 +361,12 @@ def get_nearest_neighbour(cityPos, cityLocations):
 
 def get_dist(pos1,pos2):
     """
-    Pre 2d pos cityPos, array of 2d pos cityLocations
-    pos1,pos2: 2d positions
-    ret distance Between positions
-    TestStaus: None
-    Dependencies: None
+    Args:
+        2d pos cityPos, array of 2d pos cityLocations
+        pos1,pos2: 2d positions
+    
+    Returns:
+        distance Between positions
     """
     
     # X Pos
