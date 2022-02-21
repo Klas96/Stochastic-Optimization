@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def main():
     AS()
 
@@ -12,12 +15,12 @@ def DeBug():
 
     addpath('/TSPgraphics')
 
-    cityLocation = LoadCityLocations()
+    cityLocation = load_city_locations()
     numberOfCities = len(cityLocation)
     nearestNeighbourPathlen = GetNearestNeighbourPathlen(cityLocation)
     tau0 = numberOfAnts/nearestNeighbourPathlen
     pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
-    visibility = GetVisibility(cityLocation)
+    visibility = get_visibility(cityLocation)
 
     path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
     GetPathlen(path,cityLocation)
@@ -78,15 +81,15 @@ def AS():
      pathlenCollection = []
      for k in range(1,numberOfAnts):
       path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-      pathlen = GetPathlen(path,cityLocation)
-      if (pathlen < minimumPathlen)
+      pathlen = get_path_len(path,cityLocation)
+      if (pathlen < minimumPathlen):
         minimumPathlen = pathlen
         minimum = path
-        disp(sprintf('Iteration #d, ant #d: path len = #.5f',iIteration,k,minimumPathlen))
+        print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
         PlotPath(connection,cityLocation,path)
-      pathCollection = [pathCollection path]
+      pathCollection =[pathCollection.append(path)
 
-      pathlenCollection = [pathlenCollection pathlen]
+      pathlenCollection = pathlenCollection.append(pathlen)
 
      # Update pheromone levels
 
@@ -252,7 +255,7 @@ def InitializePheromoneLevels(numberOfCities, tau0):
     pheromoneLevel(1:numberOfCities,1:numberOfCities) = tau0
     return(pheromoneLevel)
 
-def  = GetVisibility(cityLocation)
+def get_visibility(cityLocation)
     '''
     Pre:
     cityLocation: 2d positions of all avaliable cities
@@ -270,33 +273,31 @@ def  = GetVisibility(cityLocation)
 
     for i in range(1,len(cityLocation(:,1))):
         for j in range(1,len(cityLocation)):
-        if(i ~= j)
+        if(i != j)
             neaNerglen = GetDist(cityLocation(i,:), cityLocation(j,:))
             visib(i,j) = 1/neaNerglen
 
-    return(visib)
+    return visib
 
 
-def  = GetPathlen(path,cityLocation)
-    '''
-    Pre:
-    cityLocation: 2d positions of all avaliable cities
-    Path: Path that you want to know the len of
-    Ret:
-    pathLen: len Of The Path
-    TestStaus: None
-    Dependencies: GetDist
-    '''
+def get_pathlen(path,cityLocation):
+    """
+    Args:
+        cityLocation - 2d positions of all avaliable cities
+        Path - Path that you want to know the len of
+    Returns:
+        pathLen - len Of The Path
+    """
 
     pathLen = 0
 
-    for i = 1:(len(path)-1)
+    for i in range(1:(len(path)-1)):
         indexFrom = path(i)
         indexTo = path(i+1)
         possFrom = cityLocation(indexFrom,:)
         possTo = cityLocation(indexTo,:)
 
-        newLen = GetDist(possFrom,possTo)
+        newLen = get_dist(possFrom,possTo)
         pathLen = pathLen + newLen
 
 
@@ -305,27 +306,27 @@ def  = GetPathlen(path,cityLocation)
     newLen = GetDist(possFrom,possTo)
 
     pathLen = pathLen + newLen
-    return(pathLen)
+    return pathLen
 
 
 
-def  GetNearestNeighbourPathlen(cityLocation)
-    '''
-    Pre:
-    cityLocation: 2d positions of all avaliable cities
-    ret
-    nearNeigPathLen: len Of The Nearest Naigbhor Path
-    TestStaus: None
-    Dependencies: GetNearestNeighbour
-    '''
+def  get_nearest_neighbour_pathlen(cityLocation):
+    """
+    Args:
+        cityLocation: 2d positions of all avaliable cities
+    
+    Returns:
+        nearNeigPathLen: len Of The Nearest Naigbhor Path
+    
+    """
     nearNeigPathLen = 0
     lenNearestTot = 0
     neaNergIndex = randi(len(cityLocation(:,1)))
     firstCityPos = cityLocation(neaNergIndex,:)
-    for cityIndex = 1:(len(cityLocation(:,1))-1)
+    for cityIndex in range(1,(len(cityLocation(:,1))-1))
         cityPos = cityLocation(neaNergIndex,:)
         cityLocation(neaNergIndex,:) = []
-        [neaNerglen neaNergIndex] = GetNearestNeighbour(cityPos, cityLocation)
+        neaNerglen, neaNergIndex = GetNearestNeighbour(cityPos, cityLocation)
         lenNearestTot = lenNearestTot + neaNerglen
 
     # Conect
