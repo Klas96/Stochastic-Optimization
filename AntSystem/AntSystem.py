@@ -76,7 +76,7 @@ def AS():
 
      pathCollection = []
      pathlenCollection = []
-     for k = 1:numberOfAnts
+     for k in range(1,numberOfAnts):
       path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
       pathlen = GetPathlen(path,cityLocation)
       if (pathlen < minimumPathlen)
@@ -84,22 +84,17 @@ def AS():
         minimum = path
         disp(sprintf('Iteration #d, ant #d: path len = #.5f',iIteration,k,minimumPathlen))
         PlotPath(connection,cityLocation,path)
-      end
       pathCollection = [pathCollection path]
 
       pathlenCollection = [pathlenCollection pathlen]
-     end
 
      # Update pheromone levels
 
      deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
      pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
-
-    end
     
     PlotPath(connection,cityLocation,minimum)
     title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])
-end
 
 
 def UpdatePheromoneLevels(pheromoneLevel, deltaPheromoneLevel, rho):
@@ -127,9 +122,9 @@ def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
 
     deltaPheromoneLevel = zeros(len(pathCollection(1,:)),len(pathCollection(1,:)))
 
-    for iPath in  range(1:len(pathCollection(:,1))):
+    for iPath in range(1,len(pathCollection(:,1))):
         update = 1/pathlenCollection(iPath)
-        for iCity = 1:(len(pathCollection(1,:))-1)
+        for iCity = 1:(len(pathCollection(1,:))-1):
 
         fromCity = pathCollection(iPath,iCity)
         toCity = pathCollection(iPath,iCity+1)
@@ -141,28 +136,29 @@ def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
 
 
 
-def  = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-    '''
-    Pre:
+def GeneratePath(pheromoneLevel, visibility, alpha, beta):
+    """
+    Args:
     pheromoneLevel: levels of phermone at eveary path
     visibility
     alpha: Const
     beta: Const
     tabuList: List of allready vivited Nodes
-    Ret:
+    
+    Returns:
     path: Path generated
     TestStaus: OK
     Dependencies: ChoosePath
     Problem Kommer gå från sig själv till sig själv hela tiden??
-    '''
+    """
 
-    indexForCitys = 1:len(pheromoneLevel)
+    indexForCitys = range(1,len(pheromoneLevel))
     #tabuList = true(1,len(pheromoneLevel(:,1)))
     #cityIndexList = 1:len(pheromoneLevel(:,1))
     startingPoint = randi(len(pheromoneLevel(1,:)))
     path = [startingPoint]
 
-    for i = 1:(len(pheromoneLevel(1,:))-1)
+    for i in range(1,(len(pheromoneLevel(1,:))-1)):
 
         # tabuList(startingPoint) = false
         # Take This one
@@ -184,9 +180,9 @@ def  = GeneratePath(pheromoneLevel, visibility, alpha, beta)
     return(path)
 
 
-def  ChoosePath(phermoneArray, visibilityArray, alpha, beta,tabuList)
+def  ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
     '''
-    #Pre:
+    Args:
     #startingPoint
     #pheromoneLevel: levels of phermone at eveary path
     #visibility
@@ -204,8 +200,8 @@ def  ChoosePath(phermoneArray, visibilityArray, alpha, beta,tabuList)
 
 
 def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
-    '''
-        Pre:
+    """
+        Args:
         startingPoint
         tabuFreePhermone: Phermone Levels where the tabu poistions have been removed
         tabuFreeVisibility: visibility where the tabu poistions have been removed
@@ -215,7 +211,7 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
         indexChosen: The index chosen
         TestStaus: OK
         Dependencies: None
-    '''
+    """
 
     r = rand
     probLow = 0
@@ -227,7 +223,7 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
     normlize = sum(normlize*visibilityArray**beta)
 
     # Loop Through the allowed cities
-    for i = 1:len(phermoneArray)
+    for i in range(1:len(phermoneArray)):
         probInter = phermoneArray(i)**alpha
         probInter = probInter*visibilityArray(i)**beta
         probInter = probInter/normlize
@@ -235,21 +231,22 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
         probHigh = probLow + probInter
         if probLow <= r and r <= probHigh
         indexChosen = i
-        end
+        
         probLow = probHigh
     return(indexChosen)
 
 
 
-def pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
+def InitializePheromoneLevels(numberOfCities, tau0):
     '''
-    Pre:
-    numberOfCities:
-    tau0: Starting phermone
-    Ret:
-    pheromoneLevel: Matrix of Paths With starting Phermone.
-    TestStaus: None
-    Dependencies: None
+    Args:
+        numberOfCities:
+        tau0: Starting phermone
+
+    Returns:
+        pheromoneLevel: Matrix of Paths With starting Phermone.
+        TestStaus: None
+        Dependencies: None
     '''
 
     pheromoneLevel(1:numberOfCities,1:numberOfCities) = tau0
@@ -271,8 +268,8 @@ def  = GetVisibility(cityLocation)
     neaNerglen = 0
     neaNergIndex = 0
 
-    for i = 1:len(cityLocation(:,1))
-        for j = 1:len(cityLocation)
+    for i in range(1,len(cityLocation(:,1))):
+        for j in range(1,len(cityLocation)):
         if(i ~= j)
             neaNerglen = GetDist(cityLocation(i,:), cityLocation(j,:))
             visib(i,j) = 1/neaNerglen
@@ -340,20 +337,23 @@ def  GetNearestNeighbourPathlen(cityLocation)
 
 
 
-def GetNearestNeighbour(cityPos, cityLocations)
-    '''
-    Pre 2d pos cityPos, array of 2d pos cityLocations
-    ret index of nearest path, lenNearest path
+def get_nearest_neighbour(cityPos, cityLocations):
+    """
+    Args:
+        2d pos cityPos, array of 2d pos cityLocations
+    
+    Returns:
+        index of nearest path, lenNearest path
     TestStaus: None
     Dependencies: GetDist
-    '''
+    """
     indexNearest = 0
 
     distMin = inf
-    for i = 1:(len(cityLocations(:,1)))
-        dist = GetDist(cityPos, cityLocations(i,:))
-        if(dist < distMin)
-        distMin = dist
+    for i in range(1,len(cityLocations)):
+        dist = GetDist(cityPos, cityLocations(i))
+        if(dist < distMin):
+            distMin = dist
         indexNearest = i
 
     neaNergIndex = indexNearest
@@ -362,14 +362,14 @@ def GetNearestNeighbour(cityPos, cityLocations)
 
 
 
-def dist = GetDist(pos1,pos2)
-    '''
+def get_dist(pos1,pos2):
+    """
     Pre 2d pos cityPos, array of 2d pos cityLocations
     pos1,pos2: 2d positions
     ret distance Between positions
     TestStaus: None
     Dependencies: None
-    '''
+    """
     
     # X Pos
     xDiff = pos1(1) - pos2(1)
