@@ -1,11 +1,10 @@
 import numpy as np
+import pandas as pd
 
-# Main
+
 def main():
 
   CountorPlot()
-  #hold on
-  #saveas(gcf,'CountorPlot','epsc')
 
   svar = PSO()
 
@@ -30,98 +29,100 @@ def PSO(swarm_size=50, itervall = [-5, 5]):
   Args:
     swarm_size -
     itervall -
+
   Returns:
   
   """
   
-  particelSwarm = initialize_swarm(swarm_size, itervall)
+  particle_swarm = initialize_swarm(swarm_size, itervall)
 
-  theminimaOfthaMinimima = LetTheSwarmStorm(time, particelSwarm)
-  print("Best Found Minima")
-  print(theminimaOfthaMinimima)
-  return(theminimaOfthaMinimima)
+  minima = LetTheSwarmStorm(time, particle_swarm)
 
-def LetTheSwarmStorm(time,particelSwarm):
-    inertiaConst = 1.4
-    bestFoundParticel = particelSwarm(1,:)
-    swarmMin = particelSwarm(1,:)
+  return(minima)
 
-    iter = 0
-    while(bestFoundParticel(5) > 0.0001):
-      iter = iter + 1
-      inertiaConst = inertiaConst*0.99
-      if(inertiaConst < 0.35):
-        inertiaConst = 0.35
+def LetTheSwarmStorm(time, particel_swarm, inertiaConst = 1.4):
+  """
+  """
+    
+  bestFoundParticel = particel_swarm(1,:)
+  swarmMin = particel_swarm(1,:)
 
-      particelSwarm, swarmMin = move_swarm(particelSwarm)
+  iter = 0
+  while(bestFoundParticel(5) > 0.0001):
+    iter = iter + 1
+    inertiaConst = inertiaConst*0.99
+    if(inertiaConst < 0.35):
+      inertiaConst = 0.35
 
-      if(swarmMin(5) < bestFoundParticel(5)):
-        bestFoundParticel = swarmMin
-        print("Iteration")
-        print(iter)
-        print("New Best X,Y")
-        print([bestFoundParticel(5), bestFoundParticel(1), bestFoundParticel(2)])
+      particle_swarm, swarmMin = move_swarm(particel_swarm)
+
+    if(swarmMin(5) < bestFoundParticel(5)):
+      bestFoundParticel = swarmMin
+      print("Iteration {iter}")
+      print("New Best X,Y")
+      print([bestFoundParticel(5), bestFoundParticel(1), bestFoundParticel(2)])
 
 
-      particelSwarm = update_swarms_best(particelSwarm,bestFoundParticel,inertiaConst)
+    particle_swarm = update_swarms_best(particle_swarm,bestFoundParticel,inertiaConst)
 
     theminimaOfthaMinimima = bestFoundParticel
-    plot_part_swarm(particelSwarm)
-    #title(["Iteration " num2str(iter)])
+    plot_part_swarm(particle_swarm)
     return(theminimaOfthaMinimima)
 
 
-def plot_part_swarm(particelSwarm):
+def plot_part_swarm(particle_swarm):
+  """
+  """
   #CountorPlot()
-  for i in range(1,len(particelSwarm(:,1))):
-    xIndi = particelSwarm(i,1)
-    yIndi = particelSwarm(i,2)
-    u = particelSwarm(i,3)
-    v = particelSwarm(i,4)
+  for i in range(1,len(particle_swarm(:,1))):
+    xIndi = particle_swarm(i,1)
+    yIndi = particle_swarm(i,2)
+    u = particle_swarm(i,3)
+    v = particle_swarm(i,4)
     quiver(xIndi,yIndi,u,v,'b')
 
 
 # Moves Swarm and gives Swarm min
-def move_swarm(particelSwarm):
-  swarmMin = particelSwarm[1,:]
-  for i in range(1:len(particelSwarm(:,1))):
-    particelSwarm(i, 1) = particelSwarm(i, 1) + particelSwarm(i, 3)
-    particelSwarm(i, 2) = particelSwarm(i, 2) + particelSwarm(i, 4)
+def move_swarm(particel_swarm):
+  """
+  """
+  swarmMin = particel_swarm[1,:]
+  for i in range(1:len(particle_swarm(:,1))):
+    particle_swarm(i, 1) = particle_swarm(i, 1) + particle_swarm(i, 3)
+    particle_swarm(i, 2) = particle_swarm(i, 2) + particle_swarm(i, 4)
 
-    if particelSwarm(i,5) <  swarmMin(5):
-       swarmMin = particelSwarm[i,:]
+    if particle_swarm(i,5) <  swarmMin(5):
+       swarmMin = particle_swarm[i,:]
 
-  return(particelSwarm, swarmMin)
+  return(particle_swarm, swarmMin)
 
-def update_swarms_best(particelSwarm,swarmBest,inertiaConst):
+def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 2, social_const = 2):
   timeStep = 1
-  cognetiveConst = 2
-  socialConst = 2
   vMax = 3/5
 
-  for i in range(1, len(particelSwarm(:,1))):
-    xPartBest = particelSwarm(i, 6)
-    yPartBest = particelSwarm(i, 7)
+  for i in range(1, len(particle_swarm(:,1))):
+    xPartBest = particle_swarm(i, 6)
+    yPartBest = particle_swarm(i, 7)
     xSwarmBest = swarmBest(6)
     ySwarmBest = swarmBest(7)
 
     accelX = 0
     accelY = 0
 
-    # CognetiveConst
-    accelX = accelX + cognetiveConst*rand*(xPartBest-particelSwarm(i,1))
-    accelY = accelY + cognetiveConst*rand*(yPartBest-particelSwarm(i,2))
+    # Cognetive_const
+    accelX = accelX + cognetive_const*rand*(xPartBest-particle_swarm(i,1))
+    accelY = accelY + cognetive_const*rand*(yPartBest-particle_swarm(i,2))
 
-    # socialConst
-    accelX = accelX + socialConst*rand*(xSwarmBest-particelSwarm(i,1))
-    accelY = accelY + socialConst*rand*(ySwarmBest-particelSwarm(i,2))
+    # social_const
+    accelX = accelX + social_const*rand*(xSwarmBest-particle_swarm(i,1))
+    accelY = accelY + social_const*rand*(ySwarmBest-particle_swarm(i,2))
 
     # InertiaConst
-    accelX = accelX + inertiaConst*particelSwarm(i,3)
-    accelY = accelY + inertiaConst*particelSwarm(i,4)
+    accelX = accelX + inertiaConst*particle_swarm(i,3)
+    accelY = accelY + inertiaConst*particle_swarm(i,4)
 
-    particel_swarm(i,3) = accelX
-    particel_swarm(i,4) = accelY
+    particel_swarm[i,3] = accelX
+    particel_swarm[i,4] = accelY
 
     # Restricting Velocities
     if(abs(particel_swarm(i,3)) > vMax):
@@ -144,7 +145,7 @@ def update_swarms_best(particelSwarm,swarmBest,inertiaConst):
     yIndi = particel_swarm(i,2)
     func = get_function_val(xIndi,yIndi)
 
-    if func <  particelSwarm(i,5):
+    if func <  particle_swarm(i,5):
       particel_swarm(i,5) = func
       particel_swarm(i,6) = xIndi
       particel_swarm(i,7) = yIndi
