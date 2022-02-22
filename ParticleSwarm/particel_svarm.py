@@ -2,11 +2,7 @@ import numpy as np
 import pandas as pd
 
 from particle import initialize_swarm
-
-def main():
-
-  ret = PSO()
-  print(ret)
+from target_function import get_funtion_val
 
 
 def PSO(swarm_size=50, itervall = [-5, 5]):
@@ -102,21 +98,20 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
 
     if(abs(particel['velocity'][1]) > vMax):
       if(abs(particel['velocity'][1]) < 0):
-        particel['velocity'][1] = -vMax
+        particel['velocity'][1] = -vMax 
       else:
         particel['velocity'][1] = vMax
 
-    func = get_function_val(particel['pos'])
+    func = get_funtion_val(particel['pos'])
 
-    if func <  particle_swarm(i,5):
-      particel_swarm(i,5) = func
-      particel_swarm(i,6) = xIndi
-      particel_swarm(i,7) = yIndi
+    if func <  particel['MinValue']:
+      particel['MinValue'] = func
+      particel['MinPosition'] = particel['pos']
 
-  return(particel_swarm)
+  return(particle_swarm)
 
 
-def get_funtion_val(x,y):
-  funcVal = (x**2 + y - 11)**2 + (x + y**2-7)**2
-  #funcVal = log(funcVal)
-  return(funcVal)
+
+if __name__ == '__main__':
+  ret = PSO()
+  print(ret)
