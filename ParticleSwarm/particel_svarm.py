@@ -93,17 +93,16 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
     particel['acceleration'] = accelerartion
 
     # Restricting Velocities
-    if(abs(particel['velocity']) > vMax):
-      if(particel_swarm(i,3) < 0):
-        particel_swarm(i,3) = -vMax
+    if(abs(particel['velocity'][0]) > vMax):
+      if(particel['velocity'][0] < 0):
+        particel['velocity'][0] = -vMax
+      else:
+        particel['velocity'][0] = vMax
 
-      if(particel_swarm(i,3) > 0):
-        particel_swarm(i,3) = vMax
 
-
-    if(abs(particel_swarm(i,4)) > vMax):
-      if(particel_swarm(i,4) < 0):
-        particel_swarm(i,4) = -vMax
+    if(abs(particel['velocity'][1]) > vMax):
+      if(abs(particel['velocity'][0]) < 0):
+        particel['velocity'][0] = -vMax
       elif(particel_swarm(i,4) > 0):
         particel_swarm(i,4) = vMax
 
