@@ -101,15 +101,12 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
 
 
     if(abs(particel['velocity'][1]) > vMax):
-      if(abs(particel['velocity'][0]) < 0):
-        particel['velocity'][0] = -vMax
-      elif(particel_swarm(i,4) > 0):
-        particel_swarm(i,4) = vMax
+      if(abs(particel['velocity'][1]) < 0):
+        particel['velocity'][1] = -vMax
+      else:
+        particel['velocity'][1] = vMax
 
-
-    xIndi = particel_swarm(i,1)
-    yIndi = particel_swarm(i,2)
-    func = get_function_val(xIndi,yIndi)
+    func = get_function_val(particel['pos'])
 
     if func <  particle_swarm(i,5):
       particel_swarm(i,5) = func
