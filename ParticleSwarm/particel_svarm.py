@@ -23,21 +23,25 @@ def PSO(swarm_size=50, itervall = [-5, 5]):
 
 def LetTheSwarmStorm(particel_swarm, time=1, inertiaConst = 1.4):
   """
+  Args:
+
+  Returns:
+
   """
     
-  best_found_particel = particel_swarm[1]
-  swarm_min = particel_swarm[1]
+  swarm_min_pos = particel_swarm.loc[1]
+  swarm_min = float('inf')
 
   iter = 0
-  while(best_found_particel(5) > 0.0001):
+  while(swarm_min > 0.0001):
     iter = iter + 1
     inertiaConst = inertiaConst*0.99
     if(inertiaConst < 0.35):
       inertiaConst = 0.35
 
-      particle_swarm, swarm_min = move_swarm(particel_swarm)
+      particle_swarm, swarm_move_min = move_swarm(particel_swarm)
 
-    if(swarm_min(5) < best_found_particel(5)):
+    if(swarm_min < swarm_move_min):
       best_found_particel = swarm_min
       print("Iteration {iter}")
       print("New Best X,Y")
