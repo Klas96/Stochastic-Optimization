@@ -1,27 +1,12 @@
 import numpy as np
 import pandas as pd
 
+from particle import initialize_swarm
 
 def main():
 
-  CountorPlot()
-
-  svar = PSO()
-
-  print("Minima was found as \n")
-  print(f"X = {svar(6)}")
-  print(f"Y = {svar(7)}")
-  print(f"f = {svar(5)}")
-
-
-def CountorPlot():
-  x = np.linspace(-5,5)
-  y = np.linspace(-5,5)
-  [X,Y] = meshgrid(x,y)
-
-  Z = log(GetFunctionVal(X,Y))
-
-  contourf(X,Y,Z)
+  ret = PSO()
+  print(ret)
 
 
 def PSO(swarm_size=50, itervall = [-5, 5]):
@@ -36,99 +21,81 @@ def PSO(swarm_size=50, itervall = [-5, 5]):
   
   particle_swarm = initialize_swarm(swarm_size, itervall)
 
-  minima = LetTheSwarmStorm(time, particle_swarm)
+  minima = LetTheSwarmStorm(particle_swarm)
 
   return(minima)
 
-def LetTheSwarmStorm(time, particel_swarm, inertiaConst = 1.4):
+def LetTheSwarmStorm(particel_swarm, time=1, inertiaConst = 1.4):
   """
   """
     
-  bestFoundParticel = particel_swarm(1,:)
-  swarmMin = particel_swarm(1,:)
+  best_found_particel = particel_swarm[1]
+  swarm_min = particel_swarm[1]
 
   iter = 0
-  while(bestFoundParticel(5) > 0.0001):
+  while(best_found_particel(5) > 0.0001):
     iter = iter + 1
     inertiaConst = inertiaConst*0.99
     if(inertiaConst < 0.35):
       inertiaConst = 0.35
 
-      particle_swarm, swarmMin = move_swarm(particel_swarm)
+      particle_swarm, swarm_min = move_swarm(particel_swarm)
 
-    if(swarmMin(5) < bestFoundParticel(5)):
-      bestFoundParticel = swarmMin
+    if(swarm_min(5) < best_found_particel(5)):
+      best_found_particel = swarm_min
       print("Iteration {iter}")
       print("New Best X,Y")
-      print([bestFoundParticel(5), bestFoundParticel(1), bestFoundParticel(2)])
+      print([best_found_particel(5), best_found_particel(1), best_found_particel(2)])
 
+    particle_swarm = update_swarms_best(particle_swarm,best_found_particel,inertiaConst)
+    theminimaOfthaMinimima = best_found_particel
 
-    particle_swarm = update_swarms_best(particle_swarm,bestFoundParticel,inertiaConst)
-
-    theminimaOfthaMinimima = bestFoundParticel
-    plot_part_swarm(particle_swarm)
     return(theminimaOfthaMinimima)
 
 
-def plot_part_swarm(particle_swarm):
-  """
-  """
-  #CountorPlot()
-  for i in range(1,len(particle_swarm(:,1))):
-    xIndi = particle_swarm(i,1)
-    yIndi = particle_swarm(i,2)
-    u = particle_swarm(i,3)
-    v = particle_swarm(i,4)
-    quiver(xIndi,yIndi,u,v,'b')
-
-
-# Moves Swarm and gives Swarm min
 def move_swarm(particel_swarm):
   """
+  Moves Swarm and gives Swarm min
+
+  Args:
+
+  Returns:
+
   """
-  swarmMin = particel_swarm[1,:]
-  for i in range(1:len(particle_swarm(:,1))):
-    particle_swarm(i, 1) = particle_swarm(i, 1) + particle_swarm(i, 3)
-    particle_swarm(i, 2) = particle_swarm(i, 2) + particle_swarm(i, 4)
 
-    if particle_swarm(i,5) <  swarmMin(5):
-       swarmMin = particle_swarm[i,:]
+  swarm_min = float('inf')
+  for particle in particel_swarm:
+    particle['pos'] = particle['pos'] + particle['vel']
 
-  return(particle_swarm, swarmMin)
+    if particle['value'] <  swarm_min:
+       swarm_min = particle['value']
+
+  return(particel_swarm, swarm_min)
 
 def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 2, social_const = 2):
   timeStep = 1
   vMax = 3/5
 
-  for i in range(1, len(particle_swarm(:,1))):
-    xPartBest = particle_swarm(i, 6)
-    yPartBest = particle_swarm(i, 7)
+  for particel in particle_swarm:
+    particle_best_point = particel['BestPoint']
     xSwarmBest = swarmBest(6)
     ySwarmBest = swarmBest(7)
 
-    accelX = 0
-    accelY = 0
-
     # Cognetive_const
-    accelX = accelX + cognetive_const*rand*(xPartBest-particle_swarm(i,1))
-    accelY = accelY + cognetive_const*rand*(yPartBest-particle_swarm(i,2))
+    accelerartion = np.random.uniform(0,1)*cognetive_const*(particle_best_point-particle_swarm['position'])
 
     # social_const
-    accelX = accelX + social_const*rand*(xSwarmBest-particle_swarm(i,1))
-    accelY = accelY + social_const*rand*(ySwarmBest-particle_swarm(i,2))
+    accelerartion += np.random.uniform(0,1)*social_const*(xSwarmBest-particle_swarm['position'])
 
     # InertiaConst
-    accelX = accelX + inertiaConst*particle_swarm(i,3)
-    accelY = accelY + inertiaConst*particle_swarm(i,4)
+    accelX = accelX + inertiaConst*particel['velocity']
 
-    particel_swarm[i,3] = accelX
-    particel_swarm[i,4] = accelY
+    particel['acceleration'] = accelerartion
 
     # Restricting Velocities
-    if(abs(particel_swarm(i,3)) > vMax):
+    if(abs(particel['velocity']) > vMax):
       if(particel_swarm(i,3) < 0):
         particel_swarm(i,3) = -vMax
-
 
       if(particel_swarm(i,3) > 0):
         particel_swarm(i,3) = vMax
@@ -157,42 +124,3 @@ def get_funtion_val(x,y):
   funcVal = (x**2 + y - 11)**2 + (x + y**2-7)**2
   #funcVal = log(funcVal)
   return(funcVal)
-
-
-
-# Estetics
-def UpdateDisp(meidanProg, gaProg, pMutaionValue):
-  #persistent medianMeter
-  #persistent gaMeter
-  #persistent mutMeter
-  
-  if(meidanProg>=0):
-    medianMeter = meidanProg
-
-    print('\nFinding Median ')
-    UpdateProgressbar(medianMeter)
-
-
-  if(gaProg>=0):
-    gaMeter = gaProg
-
-    print('\nRunning PSO     ')
-    UpdateProgressbar(gaMeter)
-  return(noOut)
-
-
-def UpdateProgressbar(c):
-  # Vizualization parameters
-
-  strPercentageLength = 20
-  strDotsMaximum      = 20
-
-  # Progress bar - normal progress
-  c = floor(c)
-  percentageOut = [num2str(c) '%%']
-  percentageOut = [percentageOut repmat(' ',1,strPercentageLength-length(percentageOut)-1)]
-  nDots = floor(c/100*strDotsMaximum)
-  dotOut = ['[' repmat('>',1,nDots) repmat(' ',1,strDotsMaximum-nDots) ']']
-  strOut = [percentageOut dotOut]
-
-  print([strOut])
