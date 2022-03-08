@@ -39,7 +39,7 @@ def LetTheSwarmStorm(particel_swarm, time=1, inertiaConst = 1.4):
     if(inertiaConst < 0.35):
       inertiaConst = 0.35
 
-      particle_swarm, swarm_move_min = move_swarm(particel_swarm)
+    particle_swarm, swarm_move_min = move_swarm(particel_swarm)
 
     if(swarm_min < swarm_move_min):
       best_found_particel = swarm_min
@@ -68,7 +68,7 @@ def move_swarm(particel_swarm):
     particle['pos'] = particle['pos'] + particle['vel']
 
     if particle['value'] <  swarm_min:
-       swarm_min = particle['value']
+      swarm_min = particle['value']
 
   return(particel_swarm, swarm_min)
 
