@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-
 from particle import initialize_swarm
 from target_function import get_funtion_val
 
@@ -11,22 +10,26 @@ def PSO(swarm_size=50, itervall = [-5, 5]):
     swarm_size -
     itervall -
 
-  Returns:
+  Returns:of function:
+    minima 
   
   """
   
   particle_swarm = initialize_swarm(swarm_size, itervall)
 
-  minima = LetTheSwarmStorm(particle_swarm)
+  minima = run_swarm_optimization(particle_swarm)
 
   return(minima)
 
-def LetTheSwarmStorm(particel_swarm, time=1, inertiaConst = 1.4):
+def run_swarm_optimization(particel_swarm, time=1, inertiaConst = 1.4):
   """
   Args:
+    particel_swarm
+    time=1
+    inertiaConst= 1.4
 
   Returns:
-
+    theminimaOfthaMinimima
   """
     
   swarm_min_pos = particel_swarm.loc[1]
@@ -50,7 +53,7 @@ def LetTheSwarmStorm(particel_swarm, time=1, inertiaConst = 1.4):
     particle_swarm = update_swarms_best(particle_swarm,best_found_particel,inertiaConst)
     theminimaOfthaMinimima = best_found_particel
 
-    return(theminimaOfthaMinimima)
+  return(theminimaOfthaMinimima)
 
 
 def move_swarm(particel_swarm):

@@ -1,5 +1,5 @@
 import unittest
-import particelSwarm
+import ParticleSwarm
 
 
 class test_PS(unittest.TestCase):
@@ -8,7 +8,7 @@ class test_PS(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA.GA()
+        finalAns, variabel = ParticleSwarm.
 
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
