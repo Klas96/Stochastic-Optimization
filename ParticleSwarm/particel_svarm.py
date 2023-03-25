@@ -113,14 +113,14 @@ class ParticleSwarm():
     NumberOfParticles = 50
     dimensions = 2
 
-    particel_list = []
+    self.particel_list = []
     #init numer of particels
     for i in range(self.NumberOfParticles):
-      particel_list.append(particle())
-      
+      self.particel_list.append(particle())
+
     swarm_optimal_value = None
 
-  def move_swarm(particel_swarm):
+  def move_swarm(self, particel_swarm):
     """
     Moves Swarm and gives Swarm min
 
@@ -130,13 +130,21 @@ class ParticleSwarm():
     """
 
     swarm_min = float('inf')
-    for particle in particel_swarm:
-      particle['pos'] = particle['pos'] + particle['vel']
+    for particle in self.particel_list:
+      particle.move()
 
+    for particle in particel_swarm:
       if particle['value'] <  swarm_min:
         swarm_min = particle['value']
 
     return(particel_swarm, swarm_min)
+
+  def update_swarm_direction(self):
+    """
+    Update the velocity of the particels
+    """
+    for particle in self.particel_list:
+      particle.aim(self.swarm_optimal_value)
 
     
 if __name__ == '__main__':

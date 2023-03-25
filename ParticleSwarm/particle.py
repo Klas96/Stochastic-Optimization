@@ -7,13 +7,25 @@ class particle():
 
     #TODO make N dimensional
     """
-    
+
     def __init__(self):
         self.pos = (0, 0)
         self.vel = (0, 0)
-
+        self.optima = None
+        
     def move(self):
         self.pos += self.vel
+
+    def aim(self, optima):
+        """
+        aimes the particel towards optima
+        """
+
+        pass
+
+
+
+
 
 
 def initialize_swarm(swarm_size, itervall):
