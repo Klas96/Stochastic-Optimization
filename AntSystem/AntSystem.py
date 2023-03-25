@@ -28,19 +28,23 @@ def DeBug():
     GetPathlen(randperm(50),cityLocation)
     GetPathlen(randperm(50),cityLocation)
 
-def AS():
-    
+class AS():
+    """
+    Optimization Algorithm for solving the traveling sales man problem.
+    """
+    def __init__():
+        pass
+
+
     # Ant system (AS) for Traveling Sales Man Problem (TSP)
 
     # Data
     
-    addpath('/TSPgraphics')
+    #addpath('/TSPgraphics')
     cityLocation = LoadCityLocations()
     numberOfCities = len(cityLocation)
 
-    
     # Parameters
-    
     
     numberOfAnts = 50  # To do: Set to appropriate value.
     alpha = 1.0        # To do: Set to appropriate value.
@@ -59,11 +63,11 @@ def AS():
     # Initialization
 
     range = [0 20 0 20]
-    tspFigure = InitializeTspPlot(cityLocation, range)
-    connection = InitializeConnections(cityLocation)
+    #tspFigure = InitializeTspPlot(cityLocation, range)
+    #connection = InitializeConnections(cityLocation)
 
-    pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
-    visibility = GetVisibility(cityLocation)
+    #pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
+    #visibility = GetVisibility(cityLocation)
 
     
     # Main loop
@@ -72,29 +76,29 @@ def AS():
 
     iIteration = 0
 
-    while (minimumPathlen > targetPathlen)
-     iIteration = iIteration + 1
+    while (minimumPathlen > targetPathlen):
+        iIteration = iIteration + 1
 
-     # Generate paths:
+        # Generate paths:
 
-     pathCollection = []
-     pathlenCollection = []
-     for k in range(1,numberOfAnts):
-      path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-      pathlen = get_path_len(path,cityLocation)
-      if (pathlen < minimumPathlen):
-        minimumPathlen = pathlen
-        minimum = path
-        print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
-        PlotPath(connection,cityLocation,path)
-      pathCollection =[pathCollection.append(path)
+        pathCollection = []
+        pathlenCollection = []
+        for k in range(1,numberOfAnts):
+            path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
+            pathlen = get_path_len(path,cityLocation)
+            if (pathlen < minimumPathlen):
+                minimumPathlen = pathlen
+                minimum = path
+                print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
+                PlotPath(connection,cityLocation,path)
+            pathCollection =[pathCollection.append(path)
 
-      pathlenCollection = pathlenCollection.append(pathlen)
+    pathlenCollection = pathlenCollection.append(pathlen)
 
      # Update pheromone levels
 
-     deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
-     pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
+    deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
+    pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
     
     PlotPath(connection,cityLocation,minimum)
     title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])
@@ -132,8 +136,8 @@ def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
         update = 1/pathlenCollection(iPath)
         for iCity = 1:(len(pathCollection(1,:))-1):
 
-        fromCity = pathCollection(iPath,iCity)
-        toCity = pathCollection(iPath,iCity+1)
+            fromCity = pathCollection(iPath,iCity)
+            toCity = pathCollection(iPath,iCity+1)
 
         deltaPheromoneLevel(fromCity,toCity) = deltaPheromoneLevel(fromCity,toCity) + update
         #deltaPheromoneLevel(toCity,fromCity) = deltaPheromoneLevel(toCity,fromCity) + update

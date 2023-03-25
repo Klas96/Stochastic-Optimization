@@ -1,6 +1,5 @@
 import numpy as np
 import random
-
 from .evaluate_individuals import evaluate_individual
 
 

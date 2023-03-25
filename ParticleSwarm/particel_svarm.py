@@ -6,13 +6,14 @@ from target_function import get_funtion_val
 
 def PSO(swarm_size=50, itervall = [-5, 5]):
   """
+  Particle Swarm optimization
+
   Args:
     swarm_size -
     itervall -
 
   Returns:of function:
-    minima 
-  
+    minima
   """
   
   particle_swarm = initialize_swarm(swarm_size, itervall)
@@ -20,6 +21,7 @@ def PSO(swarm_size=50, itervall = [-5, 5]):
   minima = run_swarm_optimization(particle_swarm)
 
   return(minima)
+
 
 def run_swarm_optimization(particel_swarm, time=1, inertiaConst = 1.4):
   """
@@ -56,26 +58,11 @@ def run_swarm_optimization(particel_swarm, time=1, inertiaConst = 1.4):
   return(theminimaOfthaMinimima)
 
 
-def move_swarm(particel_swarm):
-  """
-  Moves Swarm and gives Swarm min
-
-  Args:
-
-  Returns:
-
-  """
-
-  swarm_min = float('inf')
-  for particle in particel_swarm:
-    particle['pos'] = particle['pos'] + particle['vel']
-
-    if particle['value'] <  swarm_min:
-      swarm_min = particle['value']
-
-  return(particel_swarm, swarm_min)
 
 def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 2, social_const = 2):
+  """
+  
+  """
   timeStep = 1
   vMax = 3/5
 
@@ -118,7 +105,40 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
   return(particle_swarm)
 
 
+import particle
 
+class ParticleSwarm():
+  
+  def __init__(self) -> None:
+    NumberOfParticles = 50
+    dimensions = 2
+
+    particel_list = []
+    #init numer of particels
+    for i in range(self.NumberOfParticles):
+      particel_list.append(particle())
+      
+    swarm_optimal_value = None
+
+  def move_swarm(particel_swarm):
+    """
+    Moves Swarm and gives Swarm min
+
+    Args:
+
+    Returns:
+    """
+
+    swarm_min = float('inf')
+    for particle in particel_swarm:
+      particle['pos'] = particle['pos'] + particle['vel']
+
+      if particle['value'] <  swarm_min:
+        swarm_min = particle['value']
+
+    return(particel_swarm, swarm_min)
+
+    
 if __name__ == '__main__':
   ret = PSO()
   print(ret)

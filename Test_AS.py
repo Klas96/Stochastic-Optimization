@@ -1,14 +1,14 @@
 import unittest
-import AntSystem.AntSystem 
+from AntSystem import AntSystem 
 
 
 class test_AS(unittest.TestCase):
 
     def test_AS(self):
         '''
-        Test Genetic Algorithm
+        Test Ant System
         '''
-        finalAns, variabel = GA.GA() #Dont look good
+        finalAns, variabel = AntSystem() #Dont look good
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, fitnessFunction(variabel))
