@@ -6,7 +6,7 @@ from target_function import get_funtion_val
 
 def PSO(swarm_size=50, itervall = [-5, 5]):
   """
-  Particle Swarm optimization
+  Particle Swarm Optimization
 
   Args:
     swarm_size -
@@ -63,6 +63,8 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
   """
   
   """
+  cognetive_const = 2
+  social_const = 2
   timeStep = 1
   vMax = 3/5
 
@@ -85,7 +87,7 @@ def update_swarms_best(particle_swarm,swarmBest,inertiaConst, cognetive_const = 
     # Restricting Velocities
     if(abs(particel['velocity'][0]) > vMax):
       if(particel['velocity'][0] < 0):
-        particel['velocity'][0] = -vMax
+        particel['velocity'][0] = -vMswarm_ax
       else:
         particel['velocity'][0] = vMax
 
@@ -118,9 +120,14 @@ class ParticleSwarm():
     for i in range(self.NumberOfParticles):
       self.particel_list.append(particle())
 
-    swarm_optimal_value = None
+    self.swarm_optimal_value = None
+    self.swarm_optimal_varibales = None
+    self.velocity_max = 3/5
+    self.timeStep = 1
+    self.cognetive_const = 2
+    self.social_const = 2
 
-  def move_swarm(self, particel_swarm):
+  def move_swarm(self):
     """
     Moves Swarm and gives Swarm min
 
@@ -133,12 +140,6 @@ class ParticleSwarm():
     for particle in self.particel_list:
       particle.move()
 
-    for particle in particel_swarm:
-      if particle['value'] <  swarm_min:
-        swarm_min = particle['value']
-
-    return(particel_swarm, swarm_min)
-
   def update_swarm_direction(self):
     """
     Update the velocity of the particels
@@ -146,7 +147,27 @@ class ParticleSwarm():
     for particle in self.particel_list:
       particle.aim(self.swarm_optimal_value)
 
+  def update_swarm_values(self, objective_func):
+    #Update Partikels
+    for particel in self.particel_list:
+      particel_value = particel.upadte_value(objective_func)
+
+      #Treating Optimization as minimazation problem
+      if particel_value < self.swarm_optimal_value:
+        self.swarm_optimal_value = particel_value
     
+  def run_optimization(self, objective_func):
+    """
+    Optimize objective function
+    """
+
+    for epoch in range(100):
+      self.move_swarm()
+      self.update_swarm_values()
+      self.update_swarm_direction()
+
+    return(self.swarm_optimal_varibales, self.swarm_optimal_value)
+
 if __name__ == '__main__':
   ret = PSO()
   print(ret)

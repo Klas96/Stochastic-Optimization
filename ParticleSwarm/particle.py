@@ -16,13 +16,24 @@ class particle():
     def move(self):
         self.pos += self.vel
 
-    def aim(self, optima):
+    def upadte_velocity(self, optima, max_velocity):
         """
         aimes the particel towards optima
         """
 
-        pass
+        # Restricting Velocities
+        # Cap the value from below
+        value = max(self, min_value)
 
+        # Cap the value from above
+        value = min(value, max_value)
+
+    def upadte_value(self, objective_function):
+        self.value = objective_function(*self.pos)
+        if self.value < self.optima:
+            self.optima = self.value()
+        
+        return self.optima
 
 
 
