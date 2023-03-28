@@ -1,20 +1,20 @@
 import numpy as np
 import pandas as pd
-import ParticleSwarm.particle
+from ParticleSwarm.particle import particle
 
 
 class ParticleSwarm():
 
-  def __init__(self) -> None:
+  def __init__(self, lower_bound, upper_bound) -> None:
     self.number_of_particles = 50
     dimensions = 2
 
     self.particel_list = []
     #init numer of particels
     for i in range(self.number_of_particles):
-      self.particel_list.append(particle())
+      self.particel_list.append(particle(lower_bound, upper_bound))
 
-    self.swarm_optimal_value = None
+    self.swarm_optimal_value = float('inf')
     self.swarm_optimal_varibales = None
     self.velocity_max = 3/5
     self.timeStep = 1

@@ -9,14 +9,14 @@ class particle():
     #TODO make N dimensional
     """
 
-    def __init__(self, lower_bound, upper_bound, n):
+    def __init__(self, lower_bound, upper_bound, n=2):
         """
         Initilizes Position and Velocity of the particle.
         """
         self.pos = np.random.uniform(lower_bound, upper_bound, size=(n,))
         vel_bound = upper_bound - lower_bound
         self.vel = np.random.uniform(-vel_bound, vel_bound, size=(n,))
-        self.optima = None
+        self.optima = float('inf')
         self.varibale_optima = None
         
     def move(self):

@@ -12,8 +12,9 @@ class test_PS(unittest.TestCase):
         '''
         Test Particle Swarm Optimization
         '''
+
         objective_func = lambda x,y: (x-7)**2 + (y-4)**2
-        opt_pnt, opt_val = ParticleSwarm.run_optimization(objective_func)
+        opt_pnt, opt_val = ParticleSwarm(0, 10).run_optimization(objective_func)
 
         self.assertIsInstance(opt_pnt, list)
         self.assertIsInstance(opt_val, float)
