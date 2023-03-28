@@ -1,19 +1,17 @@
 import numpy as np
 import pandas as pd
-from particle import initialize_swarm
-from target_function import get_funtion_val
-import particle
+import ParticleSwarm.particle
 
 
 class ParticleSwarm():
 
   def __init__(self) -> None:
-    NumberOfParticles = 50
+    self.number_of_particles = 50
     dimensions = 2
 
     self.particel_list = []
     #init numer of particels
-    for i in range(self.NumberOfParticles):
+    for i in range(self.number_of_particles):
       self.particel_list.append(particle())
 
     self.swarm_optimal_value = None
@@ -52,18 +50,18 @@ class ParticleSwarm():
       if particel_value < self.swarm_optimal_value:
         self.swarm_optimal_value = particel_value
         
-  def run_optimization(self, objective_func):
+  def run_optimization(self, objective_func, epochs=100):
     """
     Optimize objective function
     """
 
-    for epoch in range(100):
+    for epoch in range(epochs):
       self.move_swarm()
-      self.update_swarm_values()
+      self.update_swarm_values(objective_func)
       self.update_swarm_direction()
 
     return(self.swarm_optimal_varibales, self.swarm_optimal_value)
 
 if __name__ == '__main__':
-  ret = PSO()
+  ret = ParticleSwarm()
   print(ret)
