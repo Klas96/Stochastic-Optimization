@@ -20,6 +20,9 @@ class particle():
         self.varibale_optima = None
         
     def move(self):
+        """
+        move particle
+        """
         self.pos += self.vel
 
     def upadte_velocity(self, optima,
@@ -37,11 +40,13 @@ class particle():
 
         # Cognative constant
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*cognetuive_constant*self.vel[0], self.vel[1] + rand*cognetuive_constant*self.vel[1])
+        self.vel = (self.vel[0] + rand*cognetuive_constant*self.vel[0],
+                    self.vel[1] + rand*cognetuive_constant*self.vel[1])
 
         # Social Constant
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*social_constant*self.vel[0], self.vel[1] + rand*social_constant*self.vel[1])
+        self.vel = (self.vel[0] + rand*social_constant*self.vel[0],
+                    self.vel[1] + rand*social_constant*self.vel[1])
 
         # Cap the value from above
         magnitude = math.sqrt(self.vel[0]**2 + self.vel[1]**2)

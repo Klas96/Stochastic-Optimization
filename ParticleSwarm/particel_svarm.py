@@ -5,7 +5,7 @@ from ParticleSwarm.particle import particle
 
 class ParticleSwarm():
 
-  def __init__(self, lower_bound, upper_bound) -> None:
+  def __init__(self, lower_bound, upper_bound, max_vel) -> None:
     self.number_of_particles = 50
     dimensions = 2
 
@@ -16,7 +16,7 @@ class ParticleSwarm():
 
     self.swarm_optimal_value = float('inf')
     self.swarm_optimal_varibales = None
-    self.velocity_max = 3/5
+    self.velocity_max = max_vel
     self.timeStep = 1
     self.cognetive_const = 2
     self.social_const = 2
@@ -34,12 +34,14 @@ class ParticleSwarm():
     for particle in self.particel_list:
       particle.move()
 
-  def update_swarm_direction(self):
+
+  def update_swarm_veloceties(self):
     """
     Update the velocity of the particels
     """
     for particle in self.particel_list:
-      particle.aim(self.swarm_optimal_value)
+      particle.upadte_velocity(self.swarm_optimal_value, self.velocity_max)
+
 
   def update_swarm_values(self, objective_func):
     #Update Partikels
@@ -49,7 +51,9 @@ class ParticleSwarm():
       #Treating Optimization as minimazation problem
       if particel_value < self.swarm_optimal_value:
         self.swarm_optimal_value = particel_value
-        
+        self.swarm_optimal_varibales = particel.varibale_optima
+  
+
   def run_optimization(self, objective_func, epochs=100):
     """
     Optimize objective function
