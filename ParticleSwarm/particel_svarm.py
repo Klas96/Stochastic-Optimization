@@ -44,7 +44,10 @@ class ParticleSwarm():
 
 
   def update_swarm_values(self, objective_func):
-    #Update Partikels
+    """
+    Update the values of the particels and the swarm function values
+    """
+    #Update Particels
     for particel in self.particel_list:
       particel_value = particel.upadte_value(objective_func)
 
