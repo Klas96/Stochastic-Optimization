@@ -5,41 +5,17 @@ def main():
     AS()
 
 
-def DeBug():
-    # Parameters
-    
-    numberOfAnts = 50  # To do: Set to appropriate value.
-    alpha = 1.0        # To do: Set to appropriate value.
-    beta = 2.0         # To do: Set to appropriate value.
-    rho = 0.7          # To do: set to appropriate value.
 
-    node_positions = [(2,3), (1,3), (4,3)]
-    number_of_nodes = len(node_positions)
-    nearestNeighbourPathlen = GetNearestNeighbourPathlen(node_positions)
-    tau0 = numberOfAnts/nearestNeighbourPathlen
-    pheromoneLevel = InitializePheromoneLevels(number_of_nodes, tau0)
-    visibility = get_visibility(node_positions)
 
-    path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-    GetPathlen(path,cityLocation)
-    GetPathlen(randperm(50),cityLocation)
-    GetPathlen(randperm(50),cityLocation)
-    GetPathlen(randperm(50),cityLocation)
-
-class AS():
+class AS(cityLocation):
     """
+    Ant system (AS) for Traveling Sales Man Problem (TSP)
     Optimization Algorithm for solving the traveling sales man problem.
     """
+
     def __init__():
         pass
 
-
-    # Ant system (AS) for Traveling Sales Man Problem (TSP)
-
-    # Data
-    
-    #addpath('/TSPgraphics')
-    cityLocation = LoadCityLocations()
     numberOfCities = len(cityLocation)
 
     # Parameters
@@ -114,33 +90,6 @@ def UpdatePheromoneLevels(pheromoneLevel, deltaPheromoneLevel, rho):
 
     pheromoneLevel = pheromoneLevel*(1-rho) + deltaPheromoneLevel
     return(pheromoneLevel)
-
-
-#Pre:
-  #pathCollection: A collection of all paths
-  #pathlenCollection: A colection of all path lens
-#Ret
-  #Matrix ofpathCollection the Phermone Updat levels decide py the path
-def ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection):
-    """
-    Args:
-
-    Returns:
-
-    """
-    deltaPheromoneLevel = zeros(len(pathCollection(1,:)),len(pathCollection(1,:)))
-
-    for iPath in range(1,len(pathCollection(:,1))):
-        update = 1/pathlenCollection(iPath)
-        for iCity = 1:(len(pathCollection(1,:))-1):
-
-            fromCity = pathCollection(iPath,iCity)
-            toCity = pathCollection(iPath,iCity+1)
-
-        deltaPheromoneLevel(fromCity,toCity) = deltaPheromoneLevel(fromCity,toCity) + update
-        #deltaPheromoneLevel(toCity,fromCity) = deltaPheromoneLevel(toCity,fromCity) + update
-    
-    return(deltaPheromoneLevel)
 
 
 
@@ -241,8 +190,6 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
     return(indexChosen)
 
 
-
-
 def get_visibility(cityLocation)
     """
     Args:
@@ -264,65 +211,6 @@ def get_visibility(cityLocation)
             visib(i,j) = 1/neaNerglen
 
     return visib
-
-
-def get_pathlen(path,cityLocation):
-    """
-    Args:
-        cityLocation - 2d positions of all avaliable cities
-        Path - Path that you want to know the len of
-    Returns:
-        pathLen - len Of The Path
-    """
-
-    pathLen = 0
-
-    for i in range(1:(len(path)-1)):
-        indexFrom = path(i)
-        indexTo = path(i+1)
-        possFrom = cityLocation(indexFrom,:)
-        possTo = cityLocation(indexTo,:)
-
-        newLen = get_dist(possFrom,possTo)
-        pathLen = pathLen + newLen
-
-
-    possFrom = cityLocation(path(end),:)
-    possTo = cityLocation(path(1),:)
-    newLen = GetDist(possFrom,possTo)
-
-    pathLen = pathLen + newLen
-    return pathLen
-
-
-
-def  get_nearest_neighbour_pathlen(cityLocation):
-    """
-    Args:
-        cityLocation: 2d positions of all avaliable cities
-    
-    Returns:
-        nearNeigPathLen: len Of The Nearest Naigbhor Path
-    
-    """
-    nearNeigPathLen = 0
-    lenNearestTot = 0
-    neaNergIndex = randi(len(cityLocation(:,1)))
-    firstCityPos = cityLocation(neaNergIndex,:)
-    for cityIndex in range(1,(len(cityLocation(:,1))-1))
-        cityPos = cityLocation(neaNergIndex,:)
-        cityLocation(neaNergIndex,:) = []
-        neaNerglen, neaNergIndex = GetNearestNeighbour(cityPos, cityLocation)
-        lenNearestTot = lenNearestTot + neaNerglen
-
-    # Conect
-    dist = GetDist(cityPos, firstCityPos)
-    lenNearestTot = lenNearestTot + neaNerglen
-
-    nearNeigPathLen = lenNearestTot
-    return(nearNeigPathLen)
-
-
 
 def get_nearest_neighbour(cityPos, cityLocations):
     """
