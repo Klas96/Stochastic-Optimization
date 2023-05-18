@@ -13,8 +13,7 @@ class AS(cityLocation):
 
     numberOfCities = len(cityLocation)
 
-    # Parameters
-    
+    # Parameters    
     numberOfAnts = 50  # To do: Set to appropriate value.
     alpha = 1.0        # To do: Set to appropriate value.
     beta = 2.0         # To do: Set to appropriate value.
@@ -28,8 +27,6 @@ class AS(cityLocation):
     targetPathlen = 124.0
     targetPathlen = 125.0
     targetPathlen = 125.5
-    
-    # Initialization
 
     range = [0 20 0 20]
     #tspFigure = InitializeTspPlot(cityLocation, range)
@@ -60,7 +57,7 @@ class AS(cityLocation):
                 minimum = path
                 print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
                 PlotPath(connection,cityLocation,path)
-            pathCollection =[pathCollection.append(path)
+            pathCollection = pathCollection.append(path)
 
     pathlenCollection = pathlenCollection.append(pathlen)
 
@@ -146,11 +143,6 @@ def ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
 
     nextVeretex = RunChoise(phermoneArray,visibilityArray,alpha, beta)
     return(nextVeretex)
-
-
-
-
-
 
 
 def get_dist(pos1,pos2):

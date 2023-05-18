@@ -1,29 +1,28 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-def CountorPlot(function):
-  """
-  
-  """
+def CountorPlot():
+    """
+    Generate a contour plot.
+    """
+    # Create sample data
+    x = np.linspace(-5, 5, 100)
+    y = np.linspace(-5, 5, 100)
+    X, Y = np.meshgrid(x, y)
 
-  # Create sample data
-  x = np.linspace(-5, 5, 100)
-  y = np.linspace(-5, 5, 100)
-  X, Y = np.meshgrid(x, y)
+    Z = np.sin(np.sqrt(X**2 + Y**2))
 
-  Z = np.sin(np.sqrt(X**2 + Y**2))
+    # Create contour plot
+    plt.contourf(X, Y, Z, cmap='coolwarm')
+    plt.colorbar()
 
-  # Create contour plot
-  plt.contourf(X, Y, Z, cmap='coolwarm')
-  plt.colorbar()
+    # Add labels and title
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Contour Plot')
 
-  # Add labels and title
-  plt.xlabel('X')
-  plt.ylabel('Y')
-  plt.title('Contour Plot')
-
-  # Show plot
-  plt.show()
-
+    # Show plot
+    plt.show()
 
 def plot_part_swarm(particle_swarm):
   """
