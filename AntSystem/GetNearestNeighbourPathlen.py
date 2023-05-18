@@ -16,7 +16,7 @@ def get_nearest_neighbour_pathlen(cityLocation):
     for cityIndex in range(1, len(cityLocation)):
         cityPos = cityLocation[neaNergIndex]
         del cityLocation[neaNergIndex]
-        neaNerglen, neaNergIndex = GetNearestNeighbour(cityPos, cityLocation)
+        neaNerglen, neaNergIndex = get_nearest_neighbour(cityPos, cityLocation)
         lenNearestTot += neaNerglen
 
     # Connect
@@ -25,3 +25,25 @@ def get_nearest_neighbour_pathlen(cityLocation):
 
     nearNeigPathLen = lenNearestTot
     return nearNeigPathLen
+
+
+def get_nearest_neighbour(cityPos, cityLocations):
+    """
+    Args:
+        2d pos cityPos, array of 2d pos cityLocations
+    
+    Returns:
+        index of nearest path, lenNearest path
+    """
+    indexNearest = 0
+
+    distMin = inf
+    for i in range(1,len(cityLocations)):
+        dist = GetDist(cityPos, cityLocations(i))
+        if(dist < distMin):
+            distMin = dist
+        indexNearest = i
+
+    neaNergIndex = indexNearest
+    neaNerglen = distMin
+    return(neaNerglen, neaNergIndex)

@@ -129,7 +129,7 @@ def GeneratePath(pheromoneLevel, visibility, alpha, beta):
     return(path)
 
 
-def  ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
+def ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
     '''
     Args:
         startingPoint
@@ -148,85 +148,8 @@ def  ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
     return(nextVeretex)
 
 
-def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
-    """
-        Args:
-        startingPoint
-        tabuFreePhermone: Phermone Levels where the tabu poistions have been removed
-        tabuFreeVisibility: visibility where the tabu poistions have been removed
-        alpha: Const
-        beta: Const
-        Ret:
-        indexChosen: The index chosen
-        TestStaus: OK
-        Dependencies: None
-    """
-
-    r = rand
-    probLow = 0
-    probHigh = 0
-    indexChosen = 1
-
-    # Making Normalizing Factor
-    normlize = phermoneArray**alpha
-    normlize = sum(normlize*visibilityArray**beta)
-
-    # Loop Through the allowed cities
-    for i in range(1:len(phermoneArray)):
-        probInter = phermoneArray(i)**alpha
-        probInter = probInter*visibilityArray(i)**beta
-        probInter = probInter/normlize
-
-        probHigh = probLow + probInter
-        if probLow <= r and r <= probHigh:
-            indexChosen = i
-        
-        probLow = probHigh
-    return(indexChosen)
 
 
-def get_visibility(cityLocation)
-    """
-    Args:
-        cityLocation - 2d positions of all avaliable cities
-    Returns:
-        nearNeigPathLen - len Of The Nearest Naigbhor Path
-    """
-
-    numberOfCities = len(cityLocation(:,1))
-    visib = zeros(numberOfCities,numberOfCities)
-
-    neaNerglen = 0
-    neaNergIndex = 0
-
-    for i in range(1,len(cityLocation(:,1))):
-        for j in range(1,len(cityLocation)):
-        if(i != j)
-            neaNerglen = GetDist(cityLocation(i,:), cityLocation(j,:))
-            visib(i,j) = 1/neaNerglen
-
-    return visib
-
-def get_nearest_neighbour(cityPos, cityLocations):
-    """
-    Args:
-        2d pos cityPos, array of 2d pos cityLocations
-    
-    Returns:
-        index of nearest path, lenNearest path
-    """
-    indexNearest = 0
-
-    distMin = inf
-    for i in range(1,len(cityLocations)):
-        dist = GetDist(cityPos, cityLocations(i))
-        if(dist < distMin):
-            distMin = dist
-        indexNearest = i
-
-    neaNergIndex = indexNearest
-    neaNerglen = distMin
-    return(neaNerglen, neaNergIndex)
 
 
 
