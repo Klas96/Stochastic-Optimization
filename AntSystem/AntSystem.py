@@ -1,5 +1,5 @@
 import numpy as np
-from . import GetNearestNeighbourPathlen
+from . import GetNearestNeighbourPathlen, UpdatePheromoneLevels, ComputeDeltaPheromoneLevels
 
 
 class AS(cityLocation):
@@ -29,19 +29,11 @@ class AS(cityLocation):
     targetPathlen = 125.5
 
     range = [0 20 0 20]
-    #tspFigure = InitializeTspPlot(cityLocation, range)
-    #connection = InitializeConnections(cityLocation)
 
-    #pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
-    #visibility = GetVisibility(cityLocation)
-
-    
-    # Main loop
-    
     minimumPathlen = float('infinity')
-
     iIteration = 0
 
+    # Main loop
     while (minimumPathlen > targetPathlen):
         iIteration = iIteration + 1
 
@@ -51,12 +43,12 @@ class AS(cityLocation):
         pathlenCollection = []
         for k in range(1,numberOfAnts):
             path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-            pathlen = get_path_len(path,cityLocation)
+            pathlen = get_path_len(path, cityLocation)
             if (pathlen < minimumPathlen):
                 minimumPathlen = pathlen
                 minimum = path
                 print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
-                PlotPath(connection,cityLocation,path)
+                PlotPath(connection, cityLocation,path)
             pathCollection = pathCollection.append(path)
 
     pathlenCollection = pathlenCollection.append(pathlen)
@@ -68,62 +60,6 @@ class AS(cityLocation):
     
     PlotPath(connection,cityLocation,minimum)
     title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])
-
-
-def UpdatePheromoneLevels(pheromoneLevel, deltaPheromoneLevel, rho):
-    """
-    Args:
-        pheromoneLevel - levels of phermone at eveary path
-        deltaPheromoneLevel -
-        rho -
-    Returns:
-        pheromoneLevel: New and updated phermone levles
-    """
-
-    pheromoneLevel = pheromoneLevel*(1-rho) + deltaPheromoneLevel
-    return(pheromoneLevel)
-
-
-
-def GeneratePath(pheromoneLevel, visibility, alpha, beta):
-    """
-    Args:
-        pheromoneLevel -levels of phermone at eveary path
-        visibility
-        alpha: Const
-        beta: Const
-        tabuList - List of allready vivited Nodes
-    
-    Returns:
-        path: Path generated
-    """
-
-    indexForCitys = range(1,len(pheromoneLevel))
-    #tabuList = true(1,len(pheromoneLevel(:,1)))
-    #cityIndexList = 1:len(pheromoneLevel(:,1))
-    startingPoint = randi(len(pheromoneLevel(1,:)))
-    path = [startingPoint]
-
-    for i in range(1,(len(pheromoneLevel(1,:))-1)):
-
-        # tabuList(startingPoint) = false
-        # Take This one
-        phermoneArray = pheromoneLevel(startingPoint,:)
-        phermoneArray(startingPoint) = []
-        visibilityArray = visibility(startingPoint,:)
-        visibilityArray(startingPoint) = []
-        # Remove
-        pheromoneLevel(startingPoint,:) = []
-        pheromoneLevel(:,startingPoint) = []
-        visibility(startingPoint,:) = []
-        visibility(:,startingPoint) = []
-        indexForCitys(startingPoint) = []
-        nextCity = ChoosePath(phermoneArray, visibilityArray, alpha, beta)
-
-        path = [path indexForCitys(nextCity)]
-        startingPoint = nextCity
-
-    return(path)
 
 
 def ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):
