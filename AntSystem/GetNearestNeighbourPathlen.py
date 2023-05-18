@@ -1,25 +1,27 @@
-def  get_nearest_neighbour_pathlen(cityLocation):
+import random
+
+def get_nearest_neighbour_pathlen(cityLocation):
     """
     Args:
-        cityLocation: 2d positions of all avaliable cities
+        cityLocation: 2D positions of all available cities
     
     Returns:
-        nearNeigPathLen: len Of The Nearest Naigbhor Path
-    
+        nearNeigPathLen: Length of the Nearest Neighbor Path
     """
     nearNeigPathLen = 0
     lenNearestTot = 0
-    neaNergIndex = randi(len(cityLocation(:,1)))
-    firstCityPos = cityLocation(neaNergIndex,:)
-    for cityIndex in range(1,(len(cityLocation(:,1))-1))
-        cityPos = cityLocation(neaNergIndex,:)
-        cityLocation(neaNergIndex,:) = []
-        neaNerglen, neaNergIndex = GetNearestNeighbour(cityPos, cityLocation)
-        lenNearestTot = lenNearestTot + neaNerglen
+    neaNergIndex = random.randint(0, len(cityLocation)-1)
+    firstCityPos = cityLocation[neaNergIndex]
 
-    # Conect
+    for cityIndex in range(1, len(cityLocation)):
+        cityPos = cityLocation[neaNergIndex]
+        del cityLocation[neaNergIndex]
+        neaNerglen, neaNergIndex = GetNearestNeighbour(cityPos, cityLocation)
+        lenNearestTot += neaNerglen
+
+    # Connect
     dist = GetDist(cityPos, firstCityPos)
-    lenNearestTot = lenNearestTot + neaNerglen
+    lenNearestTot += dist
 
     nearNeigPathLen = lenNearestTot
-    return(nearNeigPathLen)
+    return nearNeigPathLen

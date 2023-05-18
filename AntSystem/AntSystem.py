@@ -1,11 +1,6 @@
 import numpy as np
 from . import GetNearestNeighbourPathlen
 
-def main():
-    AS()
-
-
-
 
 class AS(cityLocation):
     """
