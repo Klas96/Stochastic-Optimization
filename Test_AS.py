@@ -8,7 +8,7 @@ class test_AS(unittest.TestCase):
         '''
         Test Ant System
         '''
-        finalAns, variabel = AntSystem() #Dont look good
+        finalAns, variabel = AntSystem()
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, fitnessFunction(variabel))

@@ -1,5 +1,5 @@
 import numpy as np
-
+from . import GetNearestNeighbourPathlen
 
 def main():
     AS()
@@ -13,14 +13,12 @@ def DeBug():
     beta = 2.0         # To do: Set to appropriate value.
     rho = 0.7          # To do: set to appropriate value.
 
-    addpath('/TSPgraphics')
-
-    cityLocation = load_city_locations()
-    numberOfCities = len(cityLocation)
-    nearestNeighbourPathlen = GetNearestNeighbourPathlen(cityLocation)
+    node_positions = [(2,3), (1,3), (4,3)]
+    number_of_nodes = len(node_positions)
+    nearestNeighbourPathlen = GetNearestNeighbourPathlen(node_positions)
     tau0 = numberOfAnts/nearestNeighbourPathlen
-    pheromoneLevel = InitializePheromoneLevels(numberOfCities, tau0)
-    visibility = get_visibility(cityLocation)
+    pheromoneLevel = InitializePheromoneLevels(number_of_nodes, tau0)
+    visibility = get_visibility(node_positions)
 
     path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
     GetPathlen(path,cityLocation)
@@ -244,20 +242,6 @@ def  RunChoise(phermoneArray,visibilityArray,alpha, beta)
 
 
 
-def InitializePheromoneLevels(numberOfCities, tau0):
-    '''
-    Args:
-        numberOfCities:
-        tau0: Starting phermone
-
-    Returns:
-        pheromoneLevel: Matrix of Paths With starting Phermone.
-        TestStaus: None
-        Dependencies: None
-    '''
-
-    pheromoneLevel(1:numberOfCities,1:numberOfCities) = tau0
-    return(pheromoneLevel)
 
 def get_visibility(cityLocation)
     """

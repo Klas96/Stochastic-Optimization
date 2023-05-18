@@ -25,7 +25,8 @@ class particle():
         """
         self.pos += self.vel
 
-    def upadte_velocity(self, optima,
+    def upadte_velocity(self,
+                        swarm_opt_var,
                         max_velocity,
                         inertia_constant = 0.7,
                         cognetuive_constant = 2,
@@ -39,14 +40,16 @@ class particle():
         self.vel = (inertia_constant*self.vel[0], inertia_constant*self.vel[1])
 
         # Cognative constant
+        # Update towards self optimum
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*cognetuive_constant*self.vel[0],
-                    self.vel[1] + rand*cognetuive_constant*self.vel[1])
+        self.vel = (self.vel[0] + rand*cognetuive_constant*(self.varibale_optima[0]-self.vel[0]),
+                    self.vel[1] + rand*cognetuive_constant*(self.varibale_optima[1]-self.vel[1]))
 
         # Social Constant
+        # update towards swarm optimum
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*social_constant*self.vel[0],
-                    self.vel[1] + rand*social_constant*self.vel[1])
+        self.vel = (self.vel[0] + rand*social_constant*(swarm_opt_var[0]-self.vel[0]),
+                    self.vel[1] + rand*social_constant*(swarm_opt_var[1]-self.vel[1]))
 
         # Cap the value from above
         magnitude = math.sqrt(self.vel[0]**2 + self.vel[1]**2)
@@ -62,30 +65,11 @@ class particle():
         """
         Update the value of the particle
         """
-
         self.value = objective_function(*self.pos)
-        
         if self.value < self.optima:
             self.optima = self.value
             self.varibale_optima = self.pos
+            #print(self.optima)
+            print(self.varibale_optima)
         
         return self.optima
-
-
-"""
-def initialize_swarm(swarm_size, itervall):
-    ""
-    Initilizes Swarm particels
-    
-    Args:
-    
-    Returns:
-        df with swarm
-    ""
-
-    cols = ['Position', 'Velocity', 'BestPosition', 'BestValue']
-
-    swarm = pd.DataFrame(np.random.uniform(*itervall, size=(swarm_size, 4)), columns=cols)
-
-    return swarm
-"""

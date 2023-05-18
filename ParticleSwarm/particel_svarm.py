@@ -5,7 +5,7 @@ from ParticleSwarm.particle import particle
 
 class ParticleSwarm():
 
-  def __init__(self, lower_bound, upper_bound, max_vel) -> None:
+  def __init__(self, lower_bound, upper_bound, max_vel=2) -> None:
     self.number_of_particles = 50
     dimensions = 2
 
@@ -14,7 +14,9 @@ class ParticleSwarm():
     for i in range(self.number_of_particles):
       self.particel_list.append(particle(lower_bound, upper_bound))
 
-    self.swarm_optimal_value = float('inf')
+
+    self.optimal_particle = self.particel_list[0]
+    #self.swarm_optimal_value = float('inf')
     self.swarm_optimal_varibales = None
     self.velocity_max = max_vel
     self.timeStep = 1
@@ -35,12 +37,12 @@ class ParticleSwarm():
       particle.move()
 
 
-  def update_swarm_veloceties(self):
+  def update_swarm_direction(self):
     """
     Update the velocity of the particels
     """
     for particle in self.particel_list:
-      particle.upadte_velocity(self.swarm_optimal_value, self.velocity_max)
+      particle.upadte_velocity(self.optimal_particle.varibale_optima, self.velocity_max)
 
 
   def update_swarm_values(self, objective_func):
@@ -51,11 +53,13 @@ class ParticleSwarm():
     for particel in self.particel_list:
       particel_value = particel.upadte_value(objective_func)
 
+      #daglundström
+
       #Treating Optimization as minimazation problem
-      if particel_value < self.swarm_optimal_value:
-        self.swarm_optimal_value = particel_value
+      if particel_value < self.optimal_particle.optima:
+        self.optimal_particle = particel
         self.swarm_optimal_varibales = particel.varibale_optima
-  
+        print(f"Svarm optima: {self.swarm_optimal_varibales}")
 
   def run_optimization(self, objective_func, epochs=100):
     """
@@ -67,8 +71,10 @@ class ParticleSwarm():
       self.update_swarm_values(objective_func)
       self.update_swarm_direction()
 
-    return(self.swarm_optimal_varibales, self.swarm_optimal_value)
-
+    #breakpoint()
+    return(self.swarm_optimal_varibales, self.optimal_particle.optima)
+  
 if __name__ == '__main__':
   ret = ParticleSwarm()
+
   print(ret)
