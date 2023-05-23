@@ -1,14 +1,15 @@
+import numpy as np
+
 def InitializePheromoneLevels(numberOfCities, tau0):
     '''
     Args:
-        numberOfCities:
-        tau0: Starting phermone
+        numberOfCities: Number of cities in the problem
+        tau0: Starting pheromone level
 
     Returns:
-        pheromoneLevel: Matrix of Paths With starting Phermone.
-        TestStaus: None
-        Dependencies: None
+        pheromoneLevel: Matrix of paths with starting pheromone levels
     '''
 
-    pheromoneLevel(1:numberOfCities,1:numberOfCities) = tau0
-    return(pheromoneLevel)
+    pheromoneLevel = np.full((numberOfCities, numberOfCities), tau0)
+    return pheromoneLevel
+

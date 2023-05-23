@@ -1,5 +1,6 @@
 import unittest
 from ParticleSwarm.particel_svarm import ParticleSwarm
+from ParticleSwarm import particle
 
 class test_PS(unittest.TestCase):
     """
@@ -28,7 +29,10 @@ class test_PS(unittest.TestCase):
 
         #print(f"{objective_function(variabel)=}")
 
-
+    def test_particle(self):
+        particle = particle.particle()
+        particle.
+        pass
 
 if __name__ == '__main__':
     unittest.main()
