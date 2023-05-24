@@ -17,7 +17,7 @@ class particle():
         vel_bound = upper_bound - lower_bound
         self.vel = np.random.uniform(-vel_bound, vel_bound, size=(n,))
         self.optima = float('inf')
-        self.varibale_optima = self.pos
+        self.varibale_optima = np.copy(self.pos)
         
     def move(self):
         """
@@ -71,6 +71,6 @@ class particle():
 
         if self.value < self.optima:
             self.optima = self.value
-            self.varibale_optima = self.pos
+            self.varibale_optima = np.copy(self.pos)
         
         return self.optima

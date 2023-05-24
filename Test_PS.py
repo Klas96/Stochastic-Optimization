@@ -22,9 +22,6 @@ class test_PS(unittest.TestCase):
         print(f"{opt_pnt=}")
         print(f"{opt_val=}")
 
-        #self.assertIsInstance(opt_pnt, list)
-        #self.assertIsInstance(opt_val, float)
-        #self.assertAlmostEqual()
         self.assertEqual(opt_val, objective_func(*opt_pnt))
         
 
@@ -45,6 +42,7 @@ class test_PS(unittest.TestCase):
         second_value = test_particle.optima
 
         self.assertTrue(second_value <= first_value)
+        self.assertEqual(objective_func(*test_particle.varibale_optima), test_particle.optima)
         
 
 if __name__ == '__main__':
