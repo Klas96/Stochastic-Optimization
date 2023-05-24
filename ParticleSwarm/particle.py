@@ -28,7 +28,7 @@ class particle():
     def update_velocity(self,
                         swarm_opt_var,
                         max_velocity,
-                        inlower_bound, upper_boertia_constant = 0.7,
+                        upper_boertia_constant = 0.7,
                         cognetuive_constant = 2,
                         social_constant = 2):
         """

@@ -17,7 +17,7 @@ class ParticleSwarm():
 
     self.optimal_particle = self.particel_list[0]
     #self.swarm_optimal_value = float('inf')
-    self.swarm_optimal_varibales = None
+    self.swarm_optimal_varibales = self.optimal_particle.pos
     self.velocity_max = max_vel
     self.timeStep = 1
     self.cognetive_const = 2
