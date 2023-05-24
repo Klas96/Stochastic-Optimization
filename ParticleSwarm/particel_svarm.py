@@ -42,7 +42,7 @@ class ParticleSwarm():
     Update the velocity of the particels
     """
     for particle in self.particel_list:
-      particle.upadte_velocity(self.optimal_particle.varibale_optima, self.velocity_max)
+      particle.update_velocity(self.optimal_particle.varibale_optima, self.velocity_max)
 
 
   def update_swarm_values(self, objective_func):
@@ -51,7 +51,7 @@ class ParticleSwarm():
     """
     #Update Particels
     for particel in self.particel_list:
-      particel_value = particel.upadte_value(objective_func)
+      particel_value = particel.update_value(objective_func)
 
       #daglundström
 
