@@ -1,5 +1,10 @@
 import random
 
+def GetDist(pos1, pos2):
+    """
+    Distance betwen pos1 and pos2
+    """
+
 def get_nearest_neighbour_pathlen(cityLocation):
     """
     Args:
@@ -37,7 +42,7 @@ def get_nearest_neighbour(cityPos, cityLocations):
     """
     indexNearest = 0
 
-    distMin = inf
+    distMin = float('inf')
     for i in range(1,len(cityLocations)):
         dist = GetDist(cityPos, cityLocations(i))
         if(dist < distMin):
@@ -46,4 +51,5 @@ def get_nearest_neighbour(cityPos, cityLocations):
 
     neaNergIndex = indexNearest
     neaNerglen = distMin
+
     return(neaNerglen, neaNergIndex)

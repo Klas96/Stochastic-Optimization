@@ -2,64 +2,63 @@ import numpy as np
 from . import GetNearestNeighbourPathlen, UpdatePheromoneLevels, ComputeDeltaPheromoneLevels
 
 
-class AS(cityLocation):
+class AS():
     """
     Ant system (AS) for Traveling Sales Man Problem (TSP)
     Optimization Algorithm for solving the traveling sales man problem.
     """
 
-    def __init__():
-        pass
+    def __init__(self, cityLocation):
+        self.nodes = cityLocation
 
-    numberOfCities = len(cityLocation)
+        numberOfCities = len(self.nodes)
 
-    # Parameters    
-    numberOfAnts = 50  # To do: Set to appropriate value.
-    alpha = 1.0        # To do: Set to appropriate value.
-    beta = 2.0         # To do: Set to appropriate value.
-    rho = 0.7          # To do: set to appropriate value.
+        # Parameters    
+        numberOfAnts = 50  # To do: Set to appropriate value.
+        alpha = 1.0        # To do: Set to appropriate value.
+        beta = 2.0         # To do: Set to appropriate value.
+        rho = 0.7          # To do: set to appropriate value.
 
-    # To do: Write the GetNearestNeighbourPathlen function
-    nearestNeighbourPathlen = GetNearestNeighbourPathlen(cityLocation)
-    tau0 = numberOfAnts/nearestNeighbourPathlen
+        # To do: Write the GetNearestNeighbourPathlen function
+        nearestNeighbourPathlen = GetNearestNeighbourPathlen(self.nodes)
+        tau0 = numberOfAnts/nearestNeighbourPathlen
 
-    targetPathlen = 123.0
-    targetPathlen = 124.0
-    targetPathlen = 125.0
-    targetPathlen = 125.5
 
-    range = [0 20 0 20]
+        range = [0, 20, 0, 20]
 
-    minimumPathlen = float('infinity')
-    iIteration = 0
+    def run(targetPathlen):
 
-    # Main loop
-    while (minimumPathlen > targetPathlen):
-        iIteration = iIteration + 1
+        minimumPathlen = float('infinity')
+        iIteration = 0
 
-        # Generate paths:
+        # Main loop
+        while (minimumPathlen > targetPathlen):
+            iIteration = iIteration + 1
 
-        pathCollection = []
-        pathlenCollection = []
-        for k in range(1,numberOfAnts):
-            path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
-            pathlen = get_path_len(path, cityLocation)
-            if (pathlen < minimumPathlen):
-                minimumPathlen = pathlen
-                minimum = path
-                print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
-                PlotPath(connection, cityLocation,path)
-            pathCollection = pathCollection.append(path)
+            # Generate paths:
 
-    pathlenCollection = pathlenCollection.append(pathlen)
+            pathCollection = []
+            pathlenCollection = []
+            for k in range(1, numberOfAnts):
+                path = GeneratePath(pheromoneLevel, visibility, alpha, beta)
+                pathlen = get_path_len(path, cityLocation)
+                if (pathlen < minimumPathlen):
+                    minimumPathlen = pathlen
+                    minimum = path
+                    print(f"Iteration {iIteration}, ant {k}: path len = {minimumPathlen}")
+                    PlotPath(connection, cityLocation,path)
+                pathCollection = pathCollection.append(path)
 
-     # Update pheromone levels
+        pathlenCollection = pathlenCollection.append(pathlen)
 
-    deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
-    pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
-    
-    PlotPath(connection,cityLocation,minimum)
-    title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])
+        # Update pheromone levels
+        #breakpoint()
+
+        deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
+        pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
+        
+        PlotPath(connection,cityLocation,minimum)
+        title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])
 
 
 def ChoosePath(phermoneArray, visibilityArray, alpha, beta, tabuList):

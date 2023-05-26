@@ -71,10 +71,5 @@ class ParticleSwarm():
       self.update_swarm_values(objective_func)
       self.update_swarm_direction()
 
-    #breakpoint()
     return(self.swarm_optimal_varibales, self.optimal_particle.optima)
-  
-if __name__ == '__main__':
-  ret = ParticleSwarm()
 
-  print(ret)
