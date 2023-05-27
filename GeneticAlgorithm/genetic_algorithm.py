@@ -11,7 +11,7 @@ class genetic_algorithm_instanc():
 #Todo add function as vaiable
 #Todo add exit criteria
 # TODO make target Function a requiered argument
-def GA(target_function = None, minimize = True, numGenerations = 250, verbose = False):
+def GA(target_function, minimize = True, numGenerations = 250, verbose = False):
     '''
     arg numGenerations = 250
     verbose = False

@@ -23,7 +23,7 @@ class test_GA(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA.GA()
+        finalAns, variabel = GA.GA(target_function)
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, function_to_mimimixe(variabel))
@@ -50,6 +50,7 @@ class test_GA(unittest.TestCase):
     def test_minimize_target_function(self):
         finalAns, variabel = GA.GA(target_function = target_function, verbose = True)
         print(f"{finalAns=} , {variabel=}")
+
 
 
 
