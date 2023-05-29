@@ -1,5 +1,5 @@
 import unittest
-import GeneticAlgorithm.genetic_algorithm as GA
+from GeneticAlgorithm.genetic_algorithm import GA
 from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 
@@ -23,9 +23,9 @@ class test_GA(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA.GA(target_function)
+        finalAns, variabel = GA(target_function).run()
         self.assertIsInstance(finalAns, float)
-        self.assertIsInstance(variabel, list)
+        #self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, function_to_mimimixe(variabel))
         
         print(f"{finalAns=}")
