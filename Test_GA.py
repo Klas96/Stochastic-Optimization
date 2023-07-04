@@ -2,6 +2,7 @@ import unittest
 from GeneticAlgorithm.genetic_algorithm import GA
 from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
+from GeneticAlgorithm.form_next_generation import form_next_generation
 
 '''
 python testMyCase.py MyCase.testItIsHot
@@ -32,6 +33,12 @@ class test_GA(unittest.TestCase):
         print(f"{variabel=}")
         print(f"{function_to_mimimixe(variabel)=}")
 
+
+    def test_form_next_generation(self):
+        
+        form_next_generation()
+        pass
+
     def test_decode_binary_chromosone(self):
         '''
         Test decode_binary_chromosone
@@ -48,7 +55,7 @@ class test_GA(unittest.TestCase):
         print(decode_variable)
     
     def test_minimize_target_function(self):
-        finalAns, variabel = GA.GA(target_function = target_function, verbose = True)
+        finalAns, variabel = GA(target_function = target_function, verbose = True).run()
         print(f"{finalAns=} , {variabel=}")
 
 
