@@ -36,7 +36,7 @@ class GA():
         # Evolve
         for i in range(self.numGenerations):
             
-            population, best_chrom, max_fitnes = form_next_generation(population, target_function = self.target_function)
+            population, best_chrom, max_fitnes = form_next_generation(population, target_function=self.target_function)
 
             # Decode Best Chromsone
             curent_best_variables = decode_binary_chromosone(best_chrom)

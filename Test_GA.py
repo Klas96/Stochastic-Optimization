@@ -3,6 +3,7 @@ from GeneticAlgorithm.genetic_algorithm import GA
 from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 from GeneticAlgorithm.form_next_generation import form_next_generation
+from GeneticAlgorithm.initialize_population import initialize_population
 
 '''
 python testMyCase.py MyCase.testItIsHot
@@ -26,7 +27,7 @@ class test_GA(unittest.TestCase):
         '''
         finalAns, variabel = GA(target_function=target_function).run()
         self.assertIsInstance(finalAns, float)
-        self.assertIsInstance(variabel, list)
+        self.assertIsInstance(variabel, np.ndarray)
         self.assertAlmostEqual(finalAns, function_to_mimimixe(variabel))
         
         print(f"{finalAns=}")
@@ -35,9 +36,19 @@ class test_GA(unittest.TestCase):
 
 
     def test_form_next_generation(self):
+        population = initialize_population()
+        best_chrom = population[0]
+        max_fitness = 0
+        population, best_chrom, max_fitness = form_next_generation(population, target_function=target_function)
+        self.assertIsInstance(population, np.ndarray)
+        self.assertIsInstance(best_chrom, np.ndarray)
+        self.assertIsInstance(max_fitness, float)
+        self.assertEqual(len(population), len(best_chrom))
+        self.assertEqual(len(population), len(max_fitness))
         
-        form_next_generation()
-        pass
+        print(f"{population=}")
+        print(f"{best_chrom=}")
+        print(f"{max_fitness=}")
 
     def test_decode_binary_chromosone(self):
         '''
