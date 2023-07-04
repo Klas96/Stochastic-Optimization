@@ -24,10 +24,10 @@ class test_GA(unittest.TestCase):
         '''
         Test Genetic Algorithm
         '''
-        finalAns, variabel = GA(target_function).run()
+        finalAns, variabel = GA(target_function=target_function).run()
         self.assertIsInstance(finalAns, float)
-        #self.assertIsInstance(variabel, list)
-        self.assertEqual(finalAns, function_to_mimimixe(variabel))
+        self.assertIsInstance(variabel, list)
+        self.assertAlmostEqual(finalAns, function_to_mimimixe(variabel))
         
         print(f"{finalAns=}")
         print(f"{variabel=}")
@@ -47,7 +47,7 @@ class test_GA(unittest.TestCase):
         chrom = [1]*varlen + [0]*varlen
         low_inter = -10
         up_inter = 50
-        decode_variable = decode_binary_chromosone(chrom, intrevall = [low_inter, up_inter], varLength = varlen)
+        decode_variable = decode_binary_chromosone(chrom, intrevall=[low_inter, up_inter], varLength=varlen)
 
         self.assertEqual(up_inter, decode_variable[0])
         self.assertEqual(low_inter, decode_variable[1])
@@ -55,13 +55,9 @@ class test_GA(unittest.TestCase):
         print(decode_variable)
     
     def test_minimize_target_function(self):
-        finalAns, variabel = GA(target_function = target_function, verbose = True).run()
+        finalAns, variabel = GA(target_function=target_function, verbose=True).run()
         print(f"{finalAns=} , {variabel=}")
-
-
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
