@@ -1,12 +1,14 @@
 import numpy as np
 
-def initialize_population(population_size = 100, number_of_variabels = 3):
+def initialize_population(init_range = (0,1), population_size = 100, number_of_variabels = 3, variabel_length = 25):
     '''
     Pre: Number of Individuals In Populations
     Ret: Population, List of populationSize number of numpy arrays§
     '''
-    variabel_length = 25
-    population = np.random.randint(0,2,(population_size,number_of_variabels*variabel_length))
+
+    min_range = init_range[0]
+    max_range = init_range[1]
+    population = np.random.randint(min_range,max_range,(population_size,number_of_variabels*variabel_length))
     return(population)
 
 

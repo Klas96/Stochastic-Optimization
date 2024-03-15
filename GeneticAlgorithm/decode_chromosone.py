@@ -1,6 +1,7 @@
 def decode_binary_chromosone(chrom, intrevall = [0,1], varLength = 25):
     '''
     Pre: Binary Chromosone, numpy array of ones and zeros
+         varLength = 25, the length of each variables in the chromsone
     Ret: Variabels Enconded in the chromsone, Doubles
     '''
     

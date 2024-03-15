@@ -11,11 +11,12 @@ import numpy as np
 class GA():
 
 
-    def __init__(self, target_function, minimize = True, numGenerations = 250, verbose = False):
+    def __init__(self, target_function, init_range = (0,1), minimize = True, numGenerations = 250, verbose = False):
         self.target_function = target_function
         self.minimize = minimize
         self.numGenerations = numGenerations
         self.verbose = verbose
+        self.population = initialize_population(number_of_variabels = 2, variabel_length = 25)
 
 
     def run(self):
@@ -23,7 +24,6 @@ class GA():
             print("Running GA")
             print(f"Number of Generations: {self.numGenerations}")
         
-        population = initialize_population()
 
         curent_optima = float('inf')
         if not self.minimize:
@@ -36,10 +36,9 @@ class GA():
         # Evolve
         for i in range(self.numGenerations):
             
-            population, best_chrom, max_fitnes = form_next_generation(population, target_function=self.target_function)
+            self.population, best_chrom, max_fitnes = form_next_generation(self.population, target_function=self.target_function)
 
             # Decode Best Chromsone
-            curent_best_variables = decode_binary_chromosone(best_chrom)
 
             if curent_best_fitness < max_fitnes:
                 curent_best_fitness = max_fitnes

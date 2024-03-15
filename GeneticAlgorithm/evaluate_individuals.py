@@ -21,7 +21,7 @@ def function_to_mimimixe(var):
 def target_to_fitness_min(fnc):
 
     def inner(var):
-        func_value = fnc(var)
+        func_value = fnc(*var)
 
         if(func_value == 0): func_value = 1e-10
 
