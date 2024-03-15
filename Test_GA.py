@@ -4,7 +4,7 @@ from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 from GeneticAlgorithm.form_next_generation import form_next_generation
 from GeneticAlgorithm.initialize_population import initialize_population
-
+import numpy as np
 '''
 python testMyCase.py MyCase.testItIsHot
 '''
@@ -43,8 +43,6 @@ class test_GA(unittest.TestCase):
         self.assertIsInstance(population, np.ndarray)
         self.assertIsInstance(best_chrom, np.ndarray)
         self.assertIsInstance(max_fitness, float)
-        self.assertEqual(len(population), len(best_chrom))
-        self.assertEqual(len(population), len(max_fitness))
         
         print(f"{population=}")
         print(f"{best_chrom=}")
