@@ -1,4 +1,4 @@
-from ParticleSwarm.particle import particle
+from ParticleSwarm.particle import Particle
 
 
 class ParticleSwarm():
@@ -10,7 +10,7 @@ class ParticleSwarm():
     self.particel_list = []
     #init numer of particels
     for i in range(self.number_of_particles):
-      self.particel_list.append(particle(lower_bound, upper_bound))
+      self.particel_list.append(Particle(lower_bound, upper_bound))
 
 
     self.optimal_particle = self.particel_list[0]
@@ -30,7 +30,6 @@ class ParticleSwarm():
     Returns:
     """
 
-    swarm_min = float('inf')
     for particle in self.particel_list:
       particle.move()
 
@@ -55,6 +54,7 @@ class ParticleSwarm():
 
       #Treating Optimization as minimazation problem
       if particel_value < self.optimal_particle.optima:
+        #DO I need to do copy here?
         self.optimal_particle = particel
         self.swarm_optimal_varibales = particel.varibale_optima
         print(f"Svarm optima: {self.swarm_optimal_varibales}")
@@ -70,4 +70,3 @@ class ParticleSwarm():
       self.update_swarm_direction()
 
     return(self.swarm_optimal_varibales, self.optimal_particle.optima)
-

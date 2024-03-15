@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import math
 
-class particle():
+class Particle():
     """
     Particel for searching solution to a problem
 
@@ -15,6 +15,7 @@ class particle():
         """
         self.pos = np.random.uniform(lower_bound, upper_bound, size=(n,))
         vel_bound = upper_bound - lower_bound
+        vel_bound = 2
         self.vel = np.random.uniform(-vel_bound, vel_bound, size=(n,))
         self.optima = float('inf')
         self.varibale_optima = np.copy(self.pos)
@@ -28,7 +29,7 @@ class particle():
     def update_velocity(self,
                         swarm_opt_var,
                         max_velocity,
-                        upper_boertia_constant = 0.7,
+                        inertia_constant=0.75,
                         cognetuive_constant = 2,
                         social_constant = 2):
         """
@@ -44,14 +45,14 @@ class particle():
         # Cognative constant
         # Update towards self optimum
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*cognetuive_constant*(self.varibale_optima[0]-self.vel[0]),
-                    self.vel[1] + rand*cognetuive_constant*(self.varibale_optima[1]-self.vel[1]))
+        self.vel = (self.vel[0] + rand*cognetuive_constant*(self.varibale_optima[0]-self.pos[0]),
+                    self.vel[1] + rand*cognetuive_constant*(self.varibale_optima[1]-self.pos[1]))
 
         # Social Constant
         # update towards swarm optimum
         rand = np.random.uniform(0,1)
-        self.vel = (self.vel[0] + rand*social_constant*(swarm_opt_var[0]-self.vel[0]),
-                    self.vel[1] + rand*social_constant*(swarm_opt_var[1]-self.vel[1]))
+        self.vel = (self.vel[0] + rand*social_constant*(swarm_opt_var[0]-self.pos[0]),
+                    self.vel[1] + rand*social_constant*(swarm_opt_var[1]-self.pos[1]))
 
         # Cap the value from above
         magnitude = math.sqrt(self.vel[0]**2 + self.vel[1]**2)

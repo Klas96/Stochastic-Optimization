@@ -1,6 +1,6 @@
 import unittest
 from ParticleSwarm.particel_svarm import ParticleSwarm
-from ParticleSwarm.particle import particle
+from ParticleSwarm.particle import Particle
 
 class test_PS(unittest.TestCase):
     """
@@ -31,7 +31,7 @@ class test_PS(unittest.TestCase):
 
         objective_func = lambda x,y: (x-7)**2 + (y-4)**2
 
-        test_particle = particle(0, 10)
+        test_particle = Particle(0, 10)
         test_particle.update_value(objective_func)
 
         first_value = test_particle.optima
