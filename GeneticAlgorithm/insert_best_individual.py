@@ -3,7 +3,7 @@ import random
 from .evaluate_individuals import evaluate_individual
 
 
-def find_best_chrom(popularion, target_function = None):
+def find_best_chrom(popularion, target_function):
     '''
     arg: population
     ret: max_fitnes, best_chrom
@@ -13,7 +13,7 @@ def find_best_chrom(popularion, target_function = None):
     best_chrom = popularion[0]
 
     for chrom in popularion:
-        fitness_value = evaluate_individual(chrom, target_function = target_function)
+        fitness_value = evaluate_individual(chrom, target_function)
         if(fitness_value > max_fitnes):
             max_fitnes = fitness_value
             best_chrom = chrom

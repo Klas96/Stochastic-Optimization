@@ -1,6 +1,5 @@
 import unittest
 from GeneticAlgorithm.genetic_algorithm import GA
-from GeneticAlgorithm.evaluate_individuals import function_to_mimimixe
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
 from GeneticAlgorithm.form_next_generation import form_next_generation
 from GeneticAlgorithm.initialize_population import initialize_population
@@ -9,10 +8,7 @@ import numpy as np
 python testMyCase.py MyCase.testItIsHot
 '''
 
-def target_function(var):
-    x1 = var[0]
-    x2 = var[1]
-    x3 = var[2]
+def target_function(x1, x2, x3):
 
     function_value = (x1-0.3)**2 + (x2-0.7)**2 + (x3-0.1)**2
 
@@ -28,11 +24,11 @@ class test_GA(unittest.TestCase):
         finalAns, variabel = GA(target_function=target_function).run()
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, np.ndarray)
-        self.assertAlmostEqual(finalAns, function_to_mimimixe(variabel))
+        self.assertAlmostEqual(finalAns, target_function(*variabel))
         
         print(f"{finalAns=}")
         print(f"{variabel=}")
-        print(f"{function_to_mimimixe(variabel)=}")
+        print(f"{target_function(*variabel)=}")
 
 
     def test_form_next_generation(self):

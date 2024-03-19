@@ -1,5 +1,4 @@
 from .form_next_generation import form_next_generation
-from .evaluate_individuals import function_to_mimimixe
 from .initialize_population import initialize_population
 from .decode_chromosone import decode_binary_chromosone
 import numpy as np
@@ -17,6 +16,7 @@ class GA():
         self.numGenerations = numGenerations
         self.verbose = verbose
         self.population = initialize_population(number_of_variabels = 2, variabel_length = 25)
+        self.num_var = 3
 
 
     def run(self):
@@ -42,9 +42,10 @@ class GA():
 
             if curent_best_fitness < max_fitnes:
                 curent_best_fitness = max_fitnes
-                all_best_variables = np.copy(decode_binary_chromosone(best_chrom))
+                all_best_variables = np.copy(decode_binary_chromosone(best_chrom, num_var = self.num_var))
                 #TODO change to value of real function
-                curent_optima = self.target_function(all_best_variables)
+                print(all_best_variables)
+                curent_optima = self.target_function(*all_best_variables)
 
             if self.verbose:
                 print(f"Generation: {i}, {curent_optima=}, {all_best_variables=}")

@@ -1,4 +1,4 @@
-def decode_binary_chromosone(chrom, intrevall = [0,1], varLength = 25):
+def decode_binary_chromosone(chrom, intrevall = [0,1], num_var = 2):
     '''
     Pre: Binary Chromosone, numpy array of ones and zeros
          varLength = 25, the length of each variables in the chromsone
@@ -8,11 +8,11 @@ def decode_binary_chromosone(chrom, intrevall = [0,1], varLength = 25):
     diff = intrevall[1]-intrevall[0]
     # TODO should be calculated from number of variables and length of chromsone
     
-    numVar = int(len(chrom)/varLength)
+    varLength = int(len(chrom)/num_var)
     #TODO Assert numVar int
 
     decode_variable = []
-    for i in range(numVar):
+    for i in range(num_var):
         pow = -1
         sum = 0
         for j in range(varLength):
