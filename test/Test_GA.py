@@ -1,7 +1,6 @@
 import unittest
 from GeneticAlgorithm.genetic_algorithm import GA
 from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
-from GeneticAlgorithm.form_next_generation import form_next_generation
 from GeneticAlgorithm.initialize_population import initialize_population
 import numpy as np
 '''
@@ -32,10 +31,11 @@ class test_GA(unittest.TestCase):
 
 
     def test_form_next_generation(self):
+        ga = GA(target_function=target_function)
         population = initialize_population()
         best_chrom = population[0]
         max_fitness = 0
-        population, best_chrom, max_fitness = form_next_generation(population, target_function=target_function)
+        population, best_chrom, max_fitness = ga.form_next_generation()
         self.assertIsInstance(population, np.ndarray)
         self.assertIsInstance(best_chrom, np.ndarray)
         self.assertIsInstance(max_fitness, float)
@@ -52,7 +52,7 @@ class test_GA(unittest.TestCase):
         chrom = [1]*varlen + [0]*varlen
         low_inter = -10
         up_inter = 50
-        decode_variable = decode_binary_chromosone(chrom, intrevall=[low_inter, up_inter], varLength=varlen)
+        decode_variable = decode_binary_chromosone(chrom, intrevall=[low_inter, up_inter])
 
         self.assertEqual(up_inter, decode_variable[0])
         self.assertEqual(low_inter, decode_variable[1])

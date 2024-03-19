@@ -1,6 +1,6 @@
 import numpy as np
 
-def initialize_population(init_range = (0,1), population_size = 100, number_of_variabels = 3, variabel_length = 25):
+def initialize_population(init_range = (0,10), population_size = 100, number_of_variabels = 3, variabel_length = 25):
     '''
     Pre: Number of Individuals In Populations
     Ret: Population, List of populationSize number of numpy arrays§
