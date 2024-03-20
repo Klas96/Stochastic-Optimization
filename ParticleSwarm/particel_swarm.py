@@ -3,9 +3,19 @@ from ParticleSwarm.particle import Particle
 
 class ParticleSwarm():
 
-  def __init__(self, lower_bound, upper_bound, max_vel=2) -> None:
-    self.number_of_particles = 50
+  def __init__(self,
+               lower_bound,
+               upper_bound,
+               number_of_particles=50,
+               max_vel=2,
+               inetria_constant=0.75,
+               cognetive_constant=2,
+               social_constant=2) -> None:
+    self.number_of_particles = number_of_particles
     dimensions = 2
+    self.cognetive_const = cognetive_constant
+    self.social_const = social_constant
+    self.inertia_constant = inetria_constant
 
     self.particel_list = []
     #init numer of particels
@@ -20,6 +30,7 @@ class ParticleSwarm():
     self.timeStep = 1
     self.cognetive_const = 2
     self.social_const = 2
+
 
   def move_swarm(self):
     """
@@ -39,7 +50,11 @@ class ParticleSwarm():
     Update the velocity of the particels
     """
     for particle in self.particel_list:
-      particle.update_velocity(self.optimal_particle.varibale_optima, self.velocity_max)
+      particle.update_velocity(self.optimal_particle.varibale_optima,
+                               self.velocity_max,
+                               inertia_constant=self.inertia_constant,
+                               cognetuive_constant=self.cognetive_const,
+                               social_constant=self.social_const)
 
 
   def update_swarm_values(self, objective_func):
@@ -58,6 +73,7 @@ class ParticleSwarm():
         self.optimal_particle = particel
         self.swarm_optimal_varibales = particel.varibale_optima
         print(f"Svarm optima: {self.swarm_optimal_varibales}")
+
 
   def run_optimization(self, objective_func, epochs=100):
     """

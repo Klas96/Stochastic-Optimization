@@ -66,7 +66,7 @@ class Particle():
 
     def update_value(self, objective_function):
         """
-        Update the value of the particle
+        Update the function value of the particle
         """
         self.value = objective_function(*self.pos)
 
