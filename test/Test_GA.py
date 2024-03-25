@@ -1,7 +1,7 @@
 import unittest
-from GeneticAlgorithm.genetic_algorithm import GA
-from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
-from GeneticAlgorithm.initialize_population import initialize_population
+from genetic_algorithm.genetic_algorithm import GA
+from genetic_algorithm.decode_chromosone import decode_binary_chromosone
+from genetic_algorithm.initialize_population import initialize_population
 import numpy as np
 '''
 python testMyCase.py MyCase.testItIsHot
