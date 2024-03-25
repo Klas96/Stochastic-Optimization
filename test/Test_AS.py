@@ -1,5 +1,5 @@
 import unittest
-from AntSystem import AntSystem 
+from AntSystem import ant_system 
 
 
 def DeBug():
@@ -32,7 +32,7 @@ class test_AS(unittest.TestCase):
         '''
         Test Ant System
         '''
-        finalAns, variabel = AntSystem()
+        finalAns, variabel = ant_system()
         self.assertIsInstance(finalAns, float)
         self.assertIsInstance(variabel, list)
         self.assertEqual(finalAns, fitnessFunction(variabel))
