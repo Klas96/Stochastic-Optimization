@@ -1,5 +1,5 @@
 import numpy as np
-from . import GetNearestNeighbourPathlen, UpdatePheromoneLevels, ComputeDeltaPheromoneLevels
+from . import compute_delta_pheromoneLevels, get_nearest_neighbour_pathlen, update_pheromone_levels
 
 
 class AS():
@@ -20,7 +20,7 @@ class AS():
         rho = 0.7          # To do: set to appropriate value.
 
         # To do: Write the GetNearestNeighbourPathlen function
-        nearestNeighbourPathlen = GetNearestNeighbourPathlen(self.nodes)
+        nearestNeighbourPathlen = get_nearest_neighbour_pathlen(self.nodes)
         tau0 = numberOfAnts/nearestNeighbourPathlen
 
 
@@ -54,8 +54,8 @@ class AS():
         # Update pheromone levels
         #breakpoint()
 
-        deltaPheromoneLevel = ComputeDeltaPheromoneLevels(pathCollection,pathlenCollection)
-        pheromoneLevel = UpdatePheromoneLevels(pheromoneLevel,deltaPheromoneLevel,rho)
+        deltaPheromoneLevel = compute_delta_pheromoneLevels(pathCollection,pathlenCollection)
+        pheromoneLevel = update_pheromone_levels(pheromoneLevel,deltaPheromoneLevel,rho)
         
         PlotPath(connection,cityLocation,minimum)
         title(['Traversions: ' num2str(iIteration) ' len: ' num2str(minimumPathlen)])

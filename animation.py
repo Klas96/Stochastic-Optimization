@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from ParticleSwarm.particel_swarm import ParticleSwarm
-from GeneticAlgorithm.genetic_algorithm import GA
-from GeneticAlgorithm.decode_chromosone import decode_binary_chromosone
+from particle_swarm import ParticleSwarm
+from genetic_algorithm import GA
+from genetic_algorithm.decode_chromosone import decode_binary_chromosone
 from matplotlib import animation
 
 
