@@ -1,4 +1,4 @@
-from ParticleSwarm.particle import Particle
+from particle_swarm.particle import Particle
 
 
 class ParticleSwarm():

@@ -1,1 +1,1 @@
-from particel_swarm import ParticleSwarm
+from .particel_swarm import ParticleSwarm
