@@ -7,7 +7,7 @@ class ParticleSwarm():
                lower_bound,
                upper_bound,
                number_of_particles=50,
-               max_vel=2,
+               max_vel=None,
                inetria_constant=0.75,
                cognetive_constant=2,
                social_constant=2) -> None:
@@ -26,7 +26,10 @@ class ParticleSwarm():
     self.optimal_particle = self.particel_list[0]
     #self.swarm_optimal_value = float('inf')
     self.swarm_optimal_varibales = self.optimal_particle.pos
-    self.velocity_max = max_vel
+    if max_vel is None:
+      self.velocity_max = 0.2*(upper_bound - lower_bound)
+    else:
+      self.velocity_max = max_vel
     self.timeStep = 1
     self.cognetive_const = 2
     self.social_const = 2
