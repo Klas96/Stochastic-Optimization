@@ -27,14 +27,15 @@ ax.plot_wireframe(X, Y, Z, color='r', linewidth=0.2)
 images = []
 
 #optimization_method = 'particle_swarm_pptimization'
-optimization_method = 'particle_swarm_pptimization'
+optimization_method = 'genetic_algorithm'
 if optimization_method == 'particle_swarm_pptimization':
     ps = ParticleSwarm(position_min,
                        position_max,
                        number_of_particles=population_len,
                        cognetive_constant=1,
-                       social_constant=2,
-                       inetria_constant=0.5)
+                       social_constant=1,
+                       inetria_constant=0.3,
+                       max_vel=0.5)
     particles = []
     for i in range(100):
         image = ax.scatter3D([ps.particel_list[n].pos[0] for n in range(population_len)],
@@ -42,7 +43,7 @@ if optimization_method == 'particle_swarm_pptimization':
                             [objective_func(ps.particel_list[n].pos[0],ps.particel_list[n].pos[1]) for n in range(population_len)], c='b')
         images.append([image])
         ps.run_optimization(objective_func, epochs=1)
-
+        
 elif optimization_method == 'genetic_algorithm':
     ga = GA(objective_func, population_size=population_len, init_range = (0,10), verbose=True, numGenerations = 1)
 
