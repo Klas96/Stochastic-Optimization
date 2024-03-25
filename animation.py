@@ -45,12 +45,13 @@ if optimization_method == 'particle_swarm_pptimization':
         ps.run_optimization(objective_func, epochs=1)
         
 elif optimization_method == 'genetic_algorithm':
-    ga = GA(objective_func, population_size=population_len, init_range = (0,10), verbose=True, numGenerations = 1)
+    init_range = (0,10)
+    ga = GA(objective_func, population_size=population_len, init_range = init_range, verbose=True, numGenerations = 1)
 
     for i in range(100):
         decoded_var_list = []
         for n in range(population_len):
-            decoded_var_list.append(decode_binary_chromosone(ga.population[n], num_var = 2))
+            decoded_var_list.append(decode_binary_chromosone(ga.population[n], num_var = 2)
             
         image = ax.scatter3D([decoded_var_list[n][0] for n in range(ga.population_size)],
                              [decoded_var_list[n][1] for n in range(ga.population_size)],

@@ -1,4 +1,5 @@
 import random
+from individual import Individual
 
 def mutate_population(population):
     '''

@@ -1,3 +1,5 @@
+#deprivcated
+
 def decode_binary_chromosone(chrom, intrevall = [0,10], num_var = 2):
     '''
     Pre: Binary Chromosone, numpy array of ones and zeros

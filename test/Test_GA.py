@@ -35,8 +35,8 @@ class test_GA(unittest.TestCase):
         population = initialize_population()
         best_chrom = population[0]
         max_fitness = 0
-        population, best_chrom, max_fitness = ga.form_next_generation()
-        self.assertIsInstance(population, np.ndarray)
+        best_chrom, max_fitness = ga.form_next_generation()
+        self.assertIsInstance(ga.population, np.ndarray)
         self.assertIsInstance(best_chrom, np.ndarray)
         self.assertIsInstance(max_fitness, float)
         
@@ -61,6 +61,8 @@ class test_GA(unittest.TestCase):
     
     def test_minimize_target_function(self):
         finalAns, variabel = GA(target_function=target_function, verbose=True).run()
+        # Ans should be close to 0
+        # variabel should be close to [0.3, 0.7, 0.1]
         print(f"{finalAns=} , {variabel=}")
 
 

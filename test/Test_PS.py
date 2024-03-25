@@ -1,6 +1,6 @@
 import unittest
-from ParticleSwarm.particel_svarm import ParticleSwarm
-from ParticleSwarm.particle import Particle
+from particle_swarm import ParticleSwarm
+from particle_swarm.particle import Particle
 
 class test_PS(unittest.TestCase):
     

@@ -1,12 +1,13 @@
 #from .form_next_generation import form_next_generation
-from .initialize_population import initialize_population
-from .decode_chromosone import decode_binary_chromosone
+#from .initialize_population import initialize_population
+#from .decode_chromosone import decode_binary_chromosone
 from .cross_population import cross_population
-from .mutate_population import mutate_population
+#from .mutate_population import mutate_population
 from .insert_best_individual import insert_chromosone, find_best_chrom
 import inspect
 import numpy as np
 import inspect
+from individual import Individual
 
 
 class GA():
@@ -15,12 +16,15 @@ class GA():
 
     def __init__(self, target_function, population_size=100, init_range = (0,10), minimize = True, numGenerations = 250, verbose = False):
         self.target_function = target_function
+        self.fittnes_function = target_function
+        self.range = init_range
+        self.var_length = 25
         self.minimize = minimize
         self.numGenerations = numGenerations
         self.verbose = verbose
         self.num_var = len(inspect.signature(target_function).parameters)
         self.population_size = population_size
-        self.population = initialize_population(init_range=init_range,population_size=self.population_size,number_of_variabels = self.num_var, variabel_length = 25)
+        self.population = self.initialize_population()
 
 
     def run(self):
@@ -58,8 +62,7 @@ class GA():
 
     def form_next_generation(self):
         '''
-        pre: population
-        return: population, best_chrom, min_fitness
+        return: best_chrom, min_fitness
         '''
         # Build Fittnnes Array
 
@@ -71,10 +74,50 @@ class GA():
         self.population = cross_population(self.population, self.target_function)
 
         # Mutate Poulation
-        self.population = mutate_population(self.population)
+        self.mutate_population()
 
         # Insert best chromosome
         self.population = insert_chromosone(best_chrom, self.population)
         
         # Return Next Generation:
         return(best_chrom, max_fitness)
+    
+    def initialize_population(self):
+        '''
+        Pre: Number of Individuals In Populations
+        Ret: Population, List of populationSize number of numpy arrays§
+        '''
+
+        population = []
+        for _ in range(self.population_size):
+            population.append(Individual(self.num_var, self.var_length, range = self.range))
+
+        return(population)
+
+
+
+    def mutate_population(self):
+        '''
+        Pre:population
+        Ret:mutated population
+        '''
+        
+        for ind in self.population:
+            ind.mutate()
+
+    def find_best_chrom(self):
+        '''
+        arg: population
+        ret: max_fitnes, best_chrom
+        '''
+
+        max_fitnes = -float('inf')
+        best_ind = self.population[0]
+
+        for ind in self.population:
+            fitness_value = ind.evaluate_individual(fittnes_function = self.find_best_chrom)
+            if(fitness_value > max_fitnes):
+                max_fitnes = fitness_value
+                best_ind = ind
+
+        return(max_fitnes, best_ind)
