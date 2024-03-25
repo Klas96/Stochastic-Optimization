@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-from .tournament_selection import tournament_select
+from .selction_methods import tournament_select
 
 
 def cross_population(population, target_function, pCross = 0.8):
