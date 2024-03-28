@@ -1,9 +1,8 @@
 import numpy as np
 import random
-from .evaluate_individuals import evaluate_individual
 
 
-def tournament_select(population, target_function, pTor = 0.75, torSize = 5):
+def tournament_select(population, fittnes_fnc, pTor = 0.75, torSize = 5):
     '''
     Pre: fitArr vector of fitness values, pTor tournament selection parameter, torSize the tournament size.
     Ret: index Index of the selcted indvidual using tournament selction.
@@ -17,8 +16,8 @@ def tournament_select(population, target_function, pTor = 0.75, torSize = 5):
 
     fitList = np.array([])
     for i in selected:
-        chrom = population[i]
-        fitList = np.append(fitList, evaluate_individual(chrom,  target_function))
+        indi = population[i]
+        fitList = np.append(fitList, indi.evaluate_fitness(fittnes_fnc))
 
     #sort lists
     indexes = np.argsort(fitList)

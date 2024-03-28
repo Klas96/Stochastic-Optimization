@@ -1,9 +1,7 @@
 import random
 
-from .evaluate_individuals import evaluate_individual
 
-
-def find_best_chrom(popularion, target_function):
+def find_best_chrom(popularion, fittnes_fnc):
     '''
     arg: population
     ret: max_fitnes, best_chrom
@@ -12,11 +10,11 @@ def find_best_chrom(popularion, target_function):
     max_fitnes = -float('inf')
     best_chrom = popularion[0]
 
-    for chrom in popularion:
-        fitness_value = evaluate_individual(chrom, target_function)
+    for indi in popularion:
+        fitness_value = indi.evaluate_individual(fittnes_fnc)
         if(fitness_value > max_fitnes):
             max_fitnes = fitness_value
-            best_chrom = chrom
+            best_chrom = indi
 
     return(max_fitnes, best_chrom)
 

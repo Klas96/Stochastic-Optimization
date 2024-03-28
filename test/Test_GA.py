@@ -1,8 +1,7 @@
 import unittest
-from genetic_algorithm.genetic_algorithm import GA
-from genetic_algorithm.decode_chromosone import decode_binary_chromosone
-from genetic_algorithm.initialize_population import initialize_population
+from genetic_algorithm import GA
 import numpy as np
+from genetic_algorithm.individual import Individual
 '''
 python testMyCase.py MyCase.testItIsHot
 '''
@@ -32,7 +31,7 @@ class test_GA(unittest.TestCase):
 
     def test_form_next_generation(self):
         ga = GA(target_function=target_function)
-        population = initialize_population()
+        population = ga.initialize_population()
         best_chrom = population[0]
         max_fitness = 0
         best_chrom, max_fitness = ga.form_next_generation()
@@ -64,6 +63,15 @@ class test_GA(unittest.TestCase):
         # Ans should be close to 0
         # variabel should be close to [0.3, 0.7, 0.1]
         print(f"{finalAns=} , {variabel=}")
+
+    def test_individual(self):
+        """
+        Test Individual
+        """
+        indi = Individual(2,25,(2,4))
+        self.assertIsInstance(indi, Individual)
+        self.assertIsInstance(indi.chromosone, np.ndarray)
+        self.assertIsInstance(indi.fitness, float)
 
 
 if __name__ == '__main__':

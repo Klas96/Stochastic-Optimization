@@ -27,8 +27,10 @@ class Individual():
 
 
     def mutate(self):
-        index = np.random.randint(len(self.chromosone))
-        self.chromosone[index] = 1 - self.chromosone[index]
+        p_mut = 0.05
+        if np.random.uniform(0, 1) < p_mut:
+            index = np.random.randint(len(self.chromosone))
+            self.chromosone[index] = abs(1 - self.chromosone[index])
 
     def evaluate_fitness(self, fittnes_function):
         self.decode_chromosone()

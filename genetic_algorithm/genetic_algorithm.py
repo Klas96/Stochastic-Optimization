@@ -7,8 +7,18 @@ from .insert_best_individual import insert_chromosone, find_best_chrom
 import inspect
 import numpy as np
 import inspect
-from individual import Individual
+from .individual import Individual
 
+def target_to_fitness_min(fnc):
+
+    def inner(var):
+        func_value = fnc(*var)
+
+        if(func_value == 0): func_value = 1e-10
+
+        return(1/func_value)
+    
+    return inner
 
 class GA():
     #Todo add exit criteria
@@ -16,7 +26,7 @@ class GA():
 
     def __init__(self, target_function, population_size=100, init_range = (0,10), minimize = True, numGenerations = 250, verbose = False):
         self.target_function = target_function
-        self.fittnes_function = target_function
+        self.fittnes_function = target_to_fitness_min(target_function)
         self.range = init_range
         self.var_length = 25
         self.minimize = minimize
@@ -40,25 +50,25 @@ class GA():
         #TODO get from population
         curent_best_fitness = -float('inf')
 
-        all_best_variables = []
+        best_variables = []
         
         # Evolve
         for i in range(self.numGenerations):
             
-            best_chrom, max_fitnes = self.form_next_generation()
+            best_ind, max_fitnes = self.form_next_generation()
 
             # Decode Best Chromsone
 
             if curent_best_fitness < max_fitnes:
                 curent_best_fitness = max_fitnes
-                all_best_variables = np.copy(decode_binary_chromosone(best_chrom, num_var = self.num_var))
-                curent_optima = self.target_function(*all_best_variables)
+                best_variables = np.copy(best_ind.variables)
+                curent_optima = self.target_function(*best_variables)
 
             if self.verbose:
-                print(f"Generation: {i}, {curent_optima=}, {all_best_variables=}")
+                print(f"Generation: {i}, {curent_optima=}, {best_variables=}")
 
         
-        return curent_optima, all_best_variables
+        return curent_optima, best_variables
 
     def form_next_generation(self):
         '''
@@ -71,7 +81,7 @@ class GA():
         max_fitness, best_chrom = find_best_chrom(self.population, self.target_function)
 
         #Cross Population
-        self.population = cross_population(self.population, self.target_function)
+        self.cross_population()
 
         # Mutate Poulation
         self.mutate_population()
@@ -95,7 +105,6 @@ class GA():
         return(population)
 
 
-
     def mutate_population(self):
         '''
         Pre:population
@@ -104,6 +113,7 @@ class GA():
         
         for ind in self.population:
             ind.mutate()
+
 
     def find_best_chrom(self):
         '''
@@ -115,9 +125,18 @@ class GA():
         best_ind = self.population[0]
 
         for ind in self.population:
-            fitness_value = ind.evaluate_individual(fittnes_function = self.find_best_chrom)
+            fitness_value = ind.evaluate_fitness(self.fittnes_function)
             if(fitness_value > max_fitnes):
                 max_fitnes = fitness_value
                 best_ind = ind
 
         return(max_fitnes, best_ind)
+    
+    def cross_population(self):
+        '''
+        crossed population
+        '''
+
+        self.population = cross_population(self.population, self.fittnes_function)
+        
+        return self.population
